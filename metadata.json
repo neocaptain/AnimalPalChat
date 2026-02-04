@@ -1,0 +1,8 @@
+
+{
+  "name": "Animal Pal Chat",
+  "description": "A cute AI chat application where you can pick a cat, dog, or koala persona to talk to. Each animal has its own unique personality and response style powered by Gemini.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
