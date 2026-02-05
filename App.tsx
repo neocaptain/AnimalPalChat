@@ -11,33 +11,71 @@ const App: React.FC = () => {
   const [language, setLanguage] = useState<Language>(Language.KO);
   const [messages, setMessages] = useState<Message[]>([]);
   const [isTyping, setIsTyping] = useState(false);
-  const [isSoundEnabled, setIsSoundEnabled] = useState(true);
+  const [isSoundEnabled, setIsSoundEnabled] = useState(false);
 
-  const persona = PERSONAS[selectedType];
-  const audioQueueRef = useRef<string[]>([]);
-  const isPlayingRef = useRef(false);
+  // Localized Custom Names State
+  const [customNames, setCustomNames] = useState<Record<Language, Record<AnimalType, string>>>(() => {
+    const saved = localStorage.getItem('animal_pal_localized_names');
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {
+        console.error("Failed to parse localized names", e);
+      }
+    }
+
+    // Initial Defaults
+    const defaults: Record<Language, Record<AnimalType, string>> = {
+      [Language.KO]: {} as Record<AnimalType, string>,
+      [Language.EN]: {} as Record<AnimalType, string>
+    };
+
+    Object.values(AnimalType).forEach(type => {
+      defaults[Language.KO][type] = PERSONAS[type].nameKo;
+      defaults[Language.EN][type] = PERSONAS[type].nameEn;
+    });
+
+    return defaults;
+  });
+
+  const persona = {
+    ...PERSONAS[selectedType],
+    name: customNames[language][selectedType],
+    systemInstruction: PERSONAS[selectedType].systemInstruction.replace(
+      /{NAME}/g,
+      customNames[language][selectedType]
+    )
+  };
+
+  const prevTypeRef = useRef<AnimalType>(selectedType);
 
   useEffect(() => {
-    geminiService.initChat(persona, language);
-    const greeting = getInitialGreeting(selectedType, language);
-    setMessages([{ id: 'init', role: 'model', text: greeting, timestamp: new Date() }]);
-    
-    // Greeting TTS
-    if (isSoundEnabled) {
-      geminiService.speak(greeting, persona);
-    }
-  }, [selectedType, language]);
+    localStorage.setItem('animal_pal_localized_names', JSON.stringify(customNames));
+  }, [customNames]);
 
-  // 음성 재생 큐 처리
-  const processAudioQueue = async () => {
-    if (isPlayingRef.current || audioQueueRef.current.length === 0) return;
-    isPlayingRef.current = true;
-    const text = audioQueueRef.current.shift();
-    if (text) {
-      await geminiService.speak(text, persona);
+  useEffect(() => {
+    const isTypeChanged = prevTypeRef.current !== selectedType;
+
+    // Pass existing history to AI so it maintains context with the new name/language
+    geminiService.initChat(persona, language, isTypeChanged ? [] : messages);
+
+    // Only reset messages if the animal type itself changed (e.g., Cat -> Dog)
+    if (isTypeChanged || messages.length === 0) {
+      const greeting = getInitialGreeting(selectedType, language, customNames[language][selectedType]);
+      setMessages([{ id: 'init', role: 'model', text: greeting, timestamp: new Date() }]);
     }
-    isPlayingRef.current = false;
-    processAudioQueue();
+
+    prevTypeRef.current = selectedType;
+  }, [selectedType, language, customNames[language][selectedType]]);
+
+  const handleUpdateName = (type: AnimalType, newName: string) => {
+    setCustomNames(prev => ({
+      ...prev,
+      [language]: {
+        ...prev[language],
+        [type]: newName
+      }
+    }));
   };
 
   const handleSendMessage = async (text: string) => {
@@ -46,8 +84,7 @@ const App: React.FC = () => {
     setIsTyping(true);
 
     let fullResponse = '';
-    let currentSentence = '';
-    
+
     // 스트리밍을 위해 빈 모델 메시지 미리 추가
     const modelMsgId = (Date.now() + 1).toString();
     setMessages(prev => [...prev, { id: modelMsgId, role: 'model', text: '', timestamp: new Date() }]);
@@ -56,23 +93,8 @@ const App: React.FC = () => {
       const stream = geminiService.sendMessageStream(text);
       for await (const chunk of stream) {
         fullResponse += chunk;
-        currentSentence += chunk;
-
         // 화면 텍스트 업데이트
         setMessages(prev => prev.map(m => m.id === modelMsgId ? { ...m, text: fullResponse } : m));
-
-        // 문장 종결자(. ! ? \n) 감지 시 TTS 큐에 추가
-        if (/[.!?\n]/.test(chunk) && isSoundEnabled) {
-          audioQueueRef.current.push(currentSentence.trim());
-          currentSentence = '';
-          processAudioQueue();
-        }
-      }
-
-      // 남은 텍스트 처리
-      if (currentSentence.trim() && isSoundEnabled) {
-        audioQueueRef.current.push(currentSentence.trim());
-        processAudioQueue();
       }
     } catch (error) {
       console.error(error);
@@ -81,70 +103,67 @@ const App: React.FC = () => {
     }
   };
 
-  function getInitialGreeting(type: AnimalType, lang: Language): string {
+  function getInitialGreeting(type: AnimalType, lang: Language, name: string): string {
     if (lang === Language.KO) {
-      switch (type) {
-        case AnimalType.CAT: return "야옹! 나는 모찌야. 🐾";
-        case AnimalType.DOG: return "멍멍! 안녕! 나는 버디야! 🎾";
-        case AnimalType.KOALA: return "안녕... 난 코아야. 좀 졸려. 🐨";
-        case AnimalType.RABBIT: return "안녕... 나는 미미야. 반가워! 🐰";
-        default: return "안녕!";
-      }
+      return `안녕! 나는 ${name}야! 🐾 반가워!`;
     } else {
-      switch (type) {
-        case AnimalType.CAT: return "Meow! I'm Mochi. 🐾";
-        case AnimalType.DOG: return "WOOF! HI! I'M BUDDY! 🎾";
-        case AnimalType.KOALA: return "Hi... I'm Koa. Zzz. 🐨";
-        case AnimalType.RABBIT: return "Hello... I'm Mimi. 🐰";
-        default: return "Hello!";
-      }
+      return `Hi! I'm ${name}! 🐾 Nice to meet you!`;
     }
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-pink-50 flex flex-col items-center p-3 md:p-6 overflow-x-hidden">
-      <div className="w-full max-w-2xl flex justify-between items-center mb-2">
-        <button 
+    <div className="min-h-screen bg-[var(--color-soft-cream)] flex flex-col items-center p-4 md:p-8 overflow-x-hidden font-['Spline_Sans']">
+      <div className="w-full max-w-3xl flex justify-between items-center mb-6">
+        <button
           onClick={() => setIsSoundEnabled(!isSoundEnabled)}
-          className={`p-1.5 rounded-full shadow-sm border border-gray-100 transition-all ${isSoundEnabled ? 'bg-indigo-100 text-indigo-600' : 'bg-gray-100 text-gray-400'}`}
+          className={`p-3 rounded-full premium-card transition-all ${isSoundEnabled ? 'bg-[var(--color-warm-peach)] text-white shadow-lg' : 'bg-gray-200 text-gray-500'}`}
         >
           {isSoundEnabled ? (
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z" /><path d="M15.54 8.46a5 5 0 0 1 0 7.07" /><path d="M19.07 4.93a10 10 0 0 1 0 14.14" /></svg>
           ) : (
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z" /><line x1="23" y1="9" x2="17" y2="15" /><line x1="17" y1="9" x2="23" y2="15" /></svg>
           )}
         </button>
 
-        <div className="bg-white/80 backdrop-blur shadow-sm p-1 rounded-full border border-gray-100 flex gap-1">
-          <button onClick={() => setLanguage(Language.KO)} className={`px-3 py-1 rounded-full text-[10px] font-bold ${language === Language.KO ? 'bg-indigo-600 text-white' : 'text-gray-400'}`}>한국어</button>
-          <button onClick={() => setLanguage(Language.EN)} className={`px-3 py-1 rounded-full text-[10px] font-bold ${language === Language.EN ? 'bg-indigo-600 text-white' : 'text-gray-400'}`}>EN</button>
+        <div className="premium-card p-1.5 flex gap-2">
+          <button onClick={() => setLanguage(Language.KO)} className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all ${language === Language.KO ? 'bg-[var(--color-warm-peach)] text-white' : 'text-gray-400 hover:text-gray-600'}`}>한국어</button>
+          <button onClick={() => setLanguage(Language.EN)} className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all ${language === Language.EN ? 'bg-[var(--color-warm-peach)] text-white' : 'text-gray-400 hover:text-gray-600'}`}>English</button>
         </div>
       </div>
 
-      <header className="w-full max-w-2xl mb-3 text-center px-2">
-        <h1 className="text-[clamp(1.25rem,6vw,2rem)] font-bold text-gray-800 flex items-center justify-center gap-2">
-          <span className="animate-bounce flex-shrink-0">🐾</span> 
-          <span>{language === Language.KO ? '동물 친구 대화' : 'Animal Pal'}</span>
+      <header className="w-full max-w-3xl mb-8 text-center px-4">
+        <h1 className="text-[clamp(2rem,8vw,3.5rem)] font-bold text-gray-900 flex items-center justify-center gap-3 font-heading">
+          <span className="animate-pulse drop-shadow-md">🐾</span>
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-amber-500">
+            {language === Language.KO ? '동물 짝꿍' : 'Critter Pal'}
+          </span>
         </h1>
+        <p className="font-elegant text-gray-500 italic mt-2 text-lg">
+          {language === Language.KO ? '당신의 소중한 반려동물 친구와 대화해보세요.' : "Chat with your precious furry best friend."}
+        </p>
       </header>
 
-      <div className="w-full max-w-2xl bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col h-[480px] md:h-[600px] border border-gray-100">
-        <div className="p-2 bg-white border-b border-gray-100 overflow-x-auto no-scrollbar">
-          <PersonaSelector selectedType={selectedType} onSelect={setSelectedType} language={language} />
+      <main className="w-full max-w-3xl premium-card overflow-hidden flex flex-col h-[600px] md:h-[750px] shadow-2xl relative">
+        {/* Glass Header for Chat */}
+        <div className="p-3 bg-white/50 border-b border-white/30 backdrop-blur-sm z-10 sticky top-0 overflow-x-auto no-scrollbar">
+          <PersonaSelector
+            selectedType={selectedType}
+            onSelect={setSelectedType}
+            language={language}
+            customNames={customNames[language]}
+            onUpdateName={handleUpdateName}
+          />
         </div>
 
-        <ChatWindow 
-          messages={messages} 
-          persona={persona} 
+        <ChatWindow
+          messages={messages}
+          persona={persona}
           onSendMessage={handleSendMessage}
           isTyping={isTyping}
           language={language}
         />
-      </div>
+      </main>
 
-      <footer className="mt-4 text-gray-400 text-[10px]">
-        Gemini 3 Flash • AI Stream
-      </footer>
     </div>
   );
 };

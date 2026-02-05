@@ -7,52 +7,83 @@ interface PersonaSelectorProps {
   selectedType: AnimalType;
   onSelect: (type: AnimalType) => void;
   language: Language;
+  customNames: Record<AnimalType, string>;
+  onUpdateName: (type: AnimalType, newName: string) => void;
 }
 
-const PersonaSelector: React.FC<PersonaSelectorProps> = ({ selectedType, onSelect, language }) => {
+const PersonaSelector: React.FC<PersonaSelectorProps> = ({
+  selectedType, onSelect, language, customNames, onUpdateName
+}) => {
   const types = Object.values(AnimalType);
+  const [editingType, setEditingType] = React.useState<AnimalType | null>(null);
+  const [tempName, setTempName] = React.useState('');
 
-  const getLabel = (type: AnimalType) => {
-    if (language === Language.KO) {
-      switch (type) {
-        case AnimalType.CAT: return '고양이';
-        case AnimalType.DOG: return '강아지';
-        case AnimalType.KOALA: return '코알라';
-        case AnimalType.RABBIT: return '토끼';
-      }
+  const handleStartEdit = (e: React.MouseEvent, type: AnimalType, currentName: string) => {
+    e.stopPropagation();
+    setEditingType(type);
+    setTempName(currentName);
+  };
+
+  const handleSaveEdit = (type: AnimalType) => {
+    if (tempName.trim()) {
+      onUpdateName(type, tempName.trim());
     }
-    return type.charAt(0) + type.slice(1).toLowerCase();
+    setEditingType(null);
   };
 
   return (
-    <div className="flex justify-start md:justify-center gap-4 px-2 min-w-max">
+    <div className="flex justify-start md:justify-center gap-6 px-4 py-2 min-w-max">
       {types.map((type) => {
         const persona = PERSONAS[type];
         const isActive = selectedType === type;
+        const currentName = customNames[type];
+        const isEditing = editingType === type;
 
         return (
-          <button
-            key={type}
-            onClick={() => onSelect(type)}
-            className={`
-              group flex flex-col items-center transition-all duration-300
-              ${isActive ? 'scale-105' : 'opacity-60 hover:opacity-100'}
-            `}
-          >
-            <div className={`
-              w-11 h-11 rounded-xl flex items-center justify-center text-xl shadow-sm
-              transition-all duration-300 border-2
-              ${isActive ? `${persona.bgColor} border-current ${persona.color}` : 'bg-gray-50 border-transparent'}
-            `}>
-              {persona.icon}
-            </div>
-            <span className={`
-              mt-1 text-[9px] font-bold transition-colors uppercase tracking-tight
-              ${isActive ? persona.color : 'text-gray-500'}
-            `}>
-              {getLabel(type)}
-            </span>
-          </button>
+          <div key={type} className="flex flex-col items-center">
+            <button
+              onClick={() => onSelect(type)}
+              className={`
+                group flex flex-col items-center transition-all duration-500
+                ${isActive ? 'scale-110' : 'opacity-40 hover:opacity-80 hover:scale-105'}
+              `}
+            >
+              <div className={`
+                w-16 h-16 rounded-2xl flex items-center justify-center text-3xl
+                transition-all duration-300 border-2 shadow-sm
+                ${isActive
+                  ? 'bg-white border-[var(--color-warm-peach)] shadow-xl'
+                  : 'bg-white/50 border-white/20'}
+              `}>
+                <span className={`transition-transform duration-500 ${isActive ? 'scale-125 rotate-6' : 'group-hover:rotate-12'}`}>
+                  {persona.icon}
+                </span>
+              </div>
+            </button>
+
+            {isEditing ? (
+              <input
+                autoFocus
+                value={tempName}
+                onChange={(e) => setTempName(e.target.value)}
+                onBlur={() => handleSaveEdit(type)}
+                onKeyDown={(e) => e.key === 'Enter' && handleSaveEdit(type)}
+                className="mt-2 w-20 text-[10px] text-center font-black border-b border-[var(--color-warm-peach)] focus:outline-none bg-transparent"
+              />
+            ) : (
+              <div
+                className={`mt-2 flex items-center gap-1 cursor-pointer group/name ${isActive ? 'text-[var(--color-warm-peach)]' : 'text-gray-400'}`}
+                onClick={(e) => handleStartEdit(e, type, currentName)}
+              >
+                <span className="text-[10px] font-black uppercase tracking-[0.15em] font-heading">
+                  {currentName}
+                </span>
+                <span className="opacity-0 group-hover/name:opacity-100 transition-opacity">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" /></svg>
+                </span>
+              </div>
+            )}
+          </div>
         );
       })}
     </div>

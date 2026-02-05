@@ -53,62 +53,77 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ messages, persona, onSendMessag
   };
 
   return (
-    <div className="flex flex-col flex-1 min-h-0 bg-gray-50/50">
-      <div className="flex-1 overflow-y-auto p-3 space-y-3">
+    <div className="flex flex-col flex-1 min-h-0 bg-transparent">
+      {/* Messages Area */}
+      <div className="flex-1 overflow-y-auto p-4 md:p-6 space-y-6 no-scrollbar">
         {messages.map((msg) => (
-          <div key={msg.id} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-            <div className={`
-              max-w-[85%] rounded-xl p-2.5 shadow-sm text-sm
-              ${msg.role === 'user' ? 'bg-indigo-600 text-white' : 'bg-white text-gray-800 border border-gray-100'}
-            `}>
+          <div key={msg.id} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} animate-in fade-in slide-in-from-bottom-2 duration-300`}>
+            <div className={`relative group max-w-[80%] md:max-w-[70%]`}>
               {msg.role === 'model' && (
-                <div className="flex items-center gap-1.5 mb-1">
-                  <span className={`text-[10px] font-black uppercase tracking-tight ${persona.color}`}>
+                <div className="flex items-center gap-2 mb-2 ml-1">
+                  <span className="text-xl drop-shadow-sm">{persona.icon}</span>
+                  <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 font-heading">
                     {persona.name}
                   </span>
                 </div>
               )}
-              <p className="whitespace-pre-wrap leading-snug">{msg.text}</p>
+
+              <div className={`
+                p-4 rounded-[22px] shadow-sm text-sm leading-relaxed
+                ${msg.role === 'user'
+                  ? 'bg-white text-gray-800 rounded-tr-none border border-white/50'
+                  : 'bg-[var(--color-soft-mint)] text-gray-800 rounded-tl-none border border-[var(--color-soft-mint)]/50'}
+              `}>
+                <p className="whitespace-pre-wrap">{msg.text}</p>
+              </div>
+
+              {msg.role === 'user' && (
+                <div className="text-right mt-1 mr-1">
+                  <span className="text-[9px] text-gray-400 font-medium uppercase tracking-tighter">You</span>
+                </div>
+              )}
             </div>
           </div>
         ))}
         {isTyping && (
-          <div className="flex justify-start">
-            <div className="bg-white border border-gray-100 rounded-xl p-2 shadow-sm flex items-center gap-1">
-              <div className="w-1.5 h-1.5 bg-indigo-400 rounded-full animate-bounce"></div>
-              <div className="w-1.5 h-1.5 bg-indigo-400 rounded-full animate-bounce [animation-delay:0.2s]"></div>
-              <div className="w-1.5 h-1.5 bg-indigo-400 rounded-full animate-bounce [animation-delay:0.4s]"></div>
+          <div className="flex justify-start items-center gap-3 ml-1 animate-pulse">
+            <span className="text-lg opacity-50">{persona.icon}</span>
+            <div className="bg-[var(--color-soft-mint)]/50 rounded-full px-4 py-2 flex items-center gap-1.5 box-content">
+              <div className="w-1.5 h-1.5 bg-[var(--color-warm-peach)] rounded-full animate-bounce"></div>
+              <div className="w-1.5 h-1.5 bg-[var(--color-warm-peach)] rounded-full animate-bounce [animation-delay:0.2s]"></div>
+              <div className="w-1.5 h-1.5 bg-[var(--color-warm-peach)] rounded-full animate-bounce [animation-delay:0.4s]"></div>
             </div>
           </div>
         )}
         <div ref={messagesEndRef} />
       </div>
 
-      <div className="p-3 bg-white border-t border-gray-100">
-        <form onSubmit={handleSubmit} className="flex gap-2 items-center">
-          <div className="relative flex-1">
+      {/* Glassmorphism Input Area */}
+      <div className="p-4 md:p-6 bg-white/40 backdrop-blur-md border-t border-white/20">
+        <form onSubmit={handleSubmit} className="flex gap-3 items-center">
+          <div className="relative flex-1 group">
             <input
               type="text"
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
-              placeholder={language === Language.KO ? "메시지..." : "Message..."}
-              className="w-full px-4 py-2 pr-10 rounded-full bg-gray-50 border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              placeholder={language === Language.KO ? "메시지를 남겨주세요..." : "Write a message..."}
+              className="w-full px-6 py-4 pr-14 rounded-full bg-white/80 border border-white/50 text-sm focus:outline-none focus:ring-4 focus:ring-[var(--color-warm-peach)]/20 transition-all placeholder:text-gray-400 shadow-inner"
               disabled={isTyping}
             />
             <button
               type="button"
               onClick={toggleListening}
-              className={`absolute right-1.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full flex items-center justify-center ${isListening ? 'bg-red-500 text-white animate-pulse' : 'text-gray-400'}`}
+              className={`absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center transition-all ${isListening ? 'bg-red-500 text-white shadow-lg animate-pulse' : 'text-gray-300 hover:text-[var(--color-warm-peach)] hover:bg-white'}`}
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" /><path d="M19 10v2a7 7 0 0 1-14 0v-2" /><line x1="12" y1="19" x2="12" y2="22" /></svg>
             </button>
           </div>
           <button
             type="submit"
             disabled={isTyping || !inputText.trim()}
-            className="w-10 h-10 rounded-full bg-indigo-600 text-white flex items-center justify-center flex-shrink-0 disabled:bg-gray-200"
+            className="w-14 h-14 rounded-full bg-[var(--color-warm-peach)] text-white flex items-center justify-center flex-shrink-0 disabled:bg-gray-200 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+            <span className="text-2xl filter drop-shadow-md">🐾</span>
           </button>
         </form>
       </div>
