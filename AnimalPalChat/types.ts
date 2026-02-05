@@ -20,7 +20,8 @@ export interface Message {
 
 export interface Persona {
   type: AnimalType;
-  name: string;
+  nameKo: string;
+  nameEn: string;
   icon: string;
   color: string;
   bgColor: string;
