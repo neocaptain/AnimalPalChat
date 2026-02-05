@@ -8,7 +8,8 @@ export class GeminiService {
   private audioContext: AudioContext | null = null;
 
   constructor() {
-    this.ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
+    const apiKey = process.env.API_KEY || (import.meta as any).env?.VITE_GEMINI_API_KEY || '';
+    this.ai = new GoogleGenAI({ apiKey });
   }
 
   public initChat(persona: Persona, language: Language, history: any[] = [], responseLength: string = '1~2 sentences') {
