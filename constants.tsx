@@ -1,6 +1,19 @@
 
 import React from 'react';
-import { AnimalType, Persona } from './types';
+import { AnimalType, Persona, UserTier, TierConfig } from './types';
+
+export const TIER_CONFIGS: Record<UserTier, TierConfig> = {
+  [UserTier.FREE]: {
+    contextSize: 8, // 8 messages (4 turns) for cost efficiency
+    maxStorageSize: 30, // Keep last 30 messages in LocalStorage
+    responseLengthTitle: '1~2 sentences'
+  },
+  [UserTier.PREMIUM]: {
+    contextSize: 20, // 20 messages (10 turns) for better memory
+    maxStorageSize: 100, // Premium users get more history
+    responseLengthTitle: '3~4 sentences'
+  }
+};
 
 export const PERSONAS: Record<AnimalType, Persona> = {
   [AnimalType.CAT]: {

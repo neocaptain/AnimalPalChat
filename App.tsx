@@ -1,8 +1,9 @@
 
 import React, { useState, useEffect, useRef } from 'react';
-import { AnimalType, Message, Language } from './types';
-import { PERSONAS } from './constants';
+import { AnimalType, Message, Language, UserTier } from './types';
+import { PERSONAS, TIER_CONFIGS } from './constants';
 import { geminiService } from './services/geminiService';
+import { storageService } from './services/storageService';
 import PersonaSelector from './components/PersonaSelector';
 import ChatWindow from './components/ChatWindow';
 
@@ -12,6 +13,10 @@ const App: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isTyping, setIsTyping] = useState(false);
   const [isSoundEnabled, setIsSoundEnabled] = useState(false);
+
+  // Tier Management (Currently FREE)
+  const userTier = UserTier.FREE;
+  const tierConfig = TIER_CONFIGS[userTier];
 
   // Localized Custom Names State
   const [customNames, setCustomNames] = useState<Record<Language, Record<AnimalType, string>>>(() => {
@@ -49,23 +54,37 @@ const App: React.FC = () => {
 
   const prevTypeRef = useRef<AnimalType>(selectedType);
 
+  // Persistence for Names
   useEffect(() => {
     localStorage.setItem('animal_pal_localized_names', JSON.stringify(customNames));
   }, [customNames]);
 
+  // Load and Init Chat
   useEffect(() => {
-    const isTypeChanged = prevTypeRef.current !== selectedType;
+    const initApp = async () => {
+      const isTypeChanged = prevTypeRef.current !== selectedType;
 
-    // Pass existing history to AI so it maintains context with the new name/language
-    geminiService.initChat(persona, language, isTypeChanged ? [] : messages);
+      // 1. Load historical messages from storage (Flexible persistence layer)
+      let history = await storageService.loadMessages(selectedType, language);
 
-    // Only reset messages if the animal type itself changed (e.g., Cat -> Dog)
-    if (isTypeChanged || messages.length === 0) {
-      const greeting = getInitialGreeting(selectedType, language, customNames[language][selectedType]);
-      setMessages([{ id: 'init', role: 'model', text: greeting, timestamp: new Date() }]);
-    }
+      // 2. If no history or type changed, add greeting
+      if (history.length === 0 || isTypeChanged) {
+        const greeting = getInitialGreeting(selectedType, language, customNames[language][selectedType]);
+        history = [{ id: 'init', role: 'model', text: greeting, timestamp: new Date() }];
+        await storageService.saveMessages(selectedType, language, history);
+      }
 
-    prevTypeRef.current = selectedType;
+      setMessages(history);
+
+      // 3. Initialize AI with ONLY the recent context
+      // This is the cost-saving step: messages.slice(-contextSize)
+      const aiContext = history.slice(-tierConfig.contextSize);
+      geminiService.initChat(persona, language, aiContext, tierConfig.responseLengthTitle);
+
+      prevTypeRef.current = selectedType;
+    };
+
+    initApp();
   }, [selectedType, language, customNames[language][selectedType]]);
 
   const handleUpdateName = (type: AnimalType, newName: string) => {
@@ -80,22 +99,36 @@ const App: React.FC = () => {
 
   const handleSendMessage = async (text: string) => {
     const userMsg: Message = { id: Date.now().toString(), role: 'user', text, timestamp: new Date() };
-    setMessages(prev => [...prev, userMsg]);
+
+    // Optimistic update
+    setMessages(prev => {
+      const updated = [...prev, userMsg];
+      // Enforce max storage size
+      const capped = updated.slice(-tierConfig.maxStorageSize);
+      storageService.saveMessages(selectedType, language, capped);
+      return capped;
+    });
+
     setIsTyping(true);
-
     let fullResponse = '';
-
-    // 스트리밍을 위해 빈 모델 메시지 미리 추가
     const modelMsgId = (Date.now() + 1).toString();
+
+    // Placeholder for model response
     setMessages(prev => [...prev, { id: modelMsgId, role: 'model', text: '', timestamp: new Date() }]);
 
     try {
       const stream = geminiService.sendMessageStream(text);
       for await (const chunk of stream) {
         fullResponse += chunk;
-        // 화면 텍스트 업데이트
         setMessages(prev => prev.map(m => m.id === modelMsgId ? { ...m, text: fullResponse } : m));
       }
+
+      // Save complete conversation
+      setMessages(prev => {
+        const capped = prev.slice(-tierConfig.maxStorageSize);
+        storageService.saveMessages(selectedType, language, capped);
+        return capped;
+      });
     } catch (error) {
       console.error(error);
     } finally {

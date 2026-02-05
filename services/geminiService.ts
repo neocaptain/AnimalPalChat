@@ -11,7 +11,7 @@ export class GeminiService {
     this.ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
   }
 
-  public initChat(persona: Persona, language: Language, history: any[] = []) {
+  public initChat(persona: Persona, language: Language, history: any[] = [], responseLength: string = '1~2 sentences') {
     const langInstruction = language === Language.KO
       ? "모든 답변은 반드시 한국어로만 작성하세요."
       : "Respond only in English.";
@@ -19,7 +19,7 @@ export class GeminiService {
     this.chat = this.ai.chats.create({
       model: 'gemini-3-flash-preview',
       config: {
-        systemInstruction: `${persona.systemInstruction}\n\nIMPORTANT: ${langInstruction} 답변은 항상 짧고 간결하게 1~2문장 이내로 하세요.`,
+        systemInstruction: `${persona.systemInstruction}\n\nIMPORTANT: ${langInstruction} 답변은 항상 ${responseLength} 이내로 짧고 간결하게 작성하세요.`,
       },
       history: history.map(msg => ({
         role: msg.role === 'user' ? 'user' : 'model',
