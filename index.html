@@ -11,6 +11,26 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Spline+Sans:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap"
     rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'warm-peach': '#EE8C2B',
+            'golden-honey': '#EEBD2B',
+            'soft-cream': '#FFF9F3',
+            'soft-mint': '#E8F5E9',
+          },
+          fontFamily: {
+            sans: ['Spline Sans', 'sans-serif'],
+            heading: ['Outfit', 'sans-serif'],
+            elegant: ['Newsreader', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
 </head>
 
 <body class="bg-gray-50 text-gray-900">
