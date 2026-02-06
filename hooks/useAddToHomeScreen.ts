@@ -11,12 +11,23 @@ interface BeforeInstallPromptEvent extends Event {
 
 export const useAddToHomeScreen = () => {
     const [promptInstall, setPromptInstall] = useState<BeforeInstallPromptEvent | null>(null);
+    const [isIOS, setIsIOS] = useState(false);
+    const [isStandalone, setIsStandalone] = useState(false);
 
     useEffect(() => {
+        // Check if already installed
+        if (window.matchMedia('(display-mode: standalone)').matches || (window.navigator as any).standalone) {
+            setIsStandalone(true);
+            return;
+        }
+
+        // Detect iOS
+        const userAgent = window.navigator.userAgent.toLowerCase();
+        const isIOSDevice = /iphone|ipad|ipod/.test(userAgent);
+        setIsIOS(isIOSDevice);
+
         const handler = (e: Event) => {
-            // Prevent the default browser install prompt
             e.preventDefault();
-            // Save the event so it can be triggered later
             setPromptInstall(e as BeforeInstallPromptEvent);
         };
 
@@ -28,25 +39,11 @@ export const useAddToHomeScreen = () => {
     }, []);
 
     const installApp = async () => {
-        if (!promptInstall) {
-            return;
-        }
-
-        // Show the install prompt
+        if (!promptInstall) return;
         await promptInstall.prompt();
-
-        // Wait for the user to respond to the prompt
         const { outcome } = await promptInstall.userChoice;
-
-        if (outcome === 'accepted') {
-            console.log('User accepted the install prompt');
-        } else {
-            console.log('User dismissed the install prompt');
-        }
-
-        // Clear the saved prompt event
-        setPromptInstall(null);
+        if (outcome === 'accepted') setPromptInstall(null);
     };
 
-    return { promptInstall, installApp };
+    return { promptInstall, installApp, isIOS, isStandalone };
 };

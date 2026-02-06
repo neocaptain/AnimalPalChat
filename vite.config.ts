@@ -14,12 +14,13 @@ export default defineConfig(({ mode }) => {
       react(),
       VitePWA({
         registerType: 'autoUpdate',
-        includeAssets: ['pwa-icon.svg'],
         manifest: {
           name: '동물 짝꿍 | Critter Pal',
           short_name: '동물 짝꿍',
           description: '동물 친구들과 함께하는 따뜻한 대화',
           theme_color: '#EE8C2B',
+          background_color: '#FFF9F3',
+          display: 'standalone',
           icons: [
             {
               src: 'pwa-icon.svg',
@@ -28,10 +29,6 @@ export default defineConfig(({ mode }) => {
               purpose: 'any maskable'
             }
           ]
-        },
-        devOptions: {
-          enabled: true,
-          type: 'module'
         }
       })
     ],
