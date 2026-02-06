@@ -14,7 +14,7 @@ export default defineConfig(({ mode }) => {
       react(),
       VitePWA({
         registerType: 'autoUpdate',
-        includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],
+        includeAssets: ['pwa-icon.svg'],
         manifest: {
           name: '동물 짝꿍 | Critter Pal',
           short_name: '동물 짝꿍',
@@ -47,4 +47,3 @@ export default defineConfig(({ mode }) => {
     }
   };
 });
-
