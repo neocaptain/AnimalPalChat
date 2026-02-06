@@ -6,6 +6,7 @@ import { geminiService } from './services/geminiService';
 import { storageService } from './services/storageService';
 import PersonaSelector from './components/PersonaSelector';
 import ChatWindow from './components/ChatWindow';
+import InstallPrompt from './components/InstallPrompt';
 
 const App: React.FC = () => {
   const [selectedType, setSelectedType] = useState<AnimalType>(AnimalType.CAT);
@@ -196,6 +197,7 @@ const App: React.FC = () => {
           />
         </div>
       </main>
+      <InstallPrompt />
     </div>
   );
 };
