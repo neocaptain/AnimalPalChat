@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Favorite Songs List</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7f0df2",
+                        "background-light": "#f7f5f8",
+                        "background-dark": "#191022",
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Spline Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .glass-header {
+            backdrop-filter: blur(12px);
+            background-color: rgba(25, 16, 34, 0.85);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white min-h-screen">
+<!-- Sticky Header Area -->
+<div class="sticky top-0 z-50 glass-header border-b border-white/5 px-4 pb-4">
+<div class="flex items-center justify-between h-16">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-3xl font-bold">favorite</span>
+<h1 class="text-2xl font-bold tracking-tight">Favorites</h1>
+</div>
+<button class="p-2 hover:bg-white/10 rounded-full transition-colors">
+<span class="material-symbols-outlined text-2xl">search</span>
+</button>
+</div>
+<!-- Action Bar -->
+<div class="flex gap-3 mt-2">
+<button class="flex-1 bg-primary hover:bg-primary/90 text-white h-12 rounded-xl font-bold flex items-center justify-center gap-2 transition-all active:scale-95 shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">play_arrow</span>
+<span>Play All</span>
+</button>
+<button class="w-12 h-12 bg-white/5 hover:bg-white/10 rounded-xl flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined">shuffle</span>
+</button>
+</div>
+</div>
+<!-- Mood Filter Chips (Horizontal Scroll) -->
+<div class="flex gap-2 p-4 overflow-x-auto custom-scrollbar">
+<div class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-primary text-white px-5 border border-primary/20">
+<p class="text-sm font-semibold">All</p>
+</div>
+<div class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-white/5 border border-white/10 px-4 hover:bg-white/10 transition-colors cursor-pointer">
+<p class="text-white/70 text-sm font-medium">Chill</p>
+</div>
+<div class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-white/5 border border-white/10 px-4 hover:bg-white/10 transition-colors cursor-pointer">
+<p class="text-white/70 text-sm font-medium">Energetic</p>
+</div>
+<div class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-white/5 border border-white/10 px-4 hover:bg-white/10 transition-colors cursor-pointer">
+<p class="text-white/70 text-sm font-medium">Night Drive</p>
+</div>
+<div class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-white/5 border border-white/10 px-4 hover:bg-white/10 transition-colors cursor-pointer">
+<p class="text-white/70 text-sm font-medium">Focus</p>
+</div>
+</div>
+<!-- Favorite Songs List -->
+<main class="px-4 pb-24 space-y-1">
+<!-- Song Item 1 -->
+<div class="group flex items-center gap-4 py-3 px-2 rounded-xl hover:bg-white/5 transition-colors">
+<div class="relative h-16 w-16 shrink-0 overflow-hidden rounded-lg shadow-md border border-white/5">
+<img alt="Album cover" class="h-full w-full object-cover" data-alt="Abstract neon digital wave album art" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0j4csEQsiNXWXMo0Ppx4OHyECKyELZV-vVoF_dspVOfjUN2da9oB8vPbGsmgG18aK6N9I9xJJF24xH5B4ErLsBPQF3b4HlCpCP3qLq4Li3Ls46NpthJ7wcCoWAISk45USuX882Nz6_DguHuDBVE3V1aMz6sIvwb87Y0T4Qig-gMi9oVWTWQCuKWk67jLbjw_zjT0vaLLYWjT6ypKD_iecoDG8fsUgn8V6k6XJcOinomuhAm2i8FC-9qpdn5pfz9YPMwXzb1-2nzOY"/>
+<div class="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-white text-2xl">play_circle</span>
+</div>
+</div>
+<div class="flex-1 min-w-0">
+<h3 class="font-bold text-base truncate">Blinding Lights</h3>
+<p class="text-white/50 text-sm truncate">The Weeknd</p>
+<div class="flex gap-1.5 mt-1.5">
+<span class="text-[10px] uppercase tracking-wider font-bold bg-primary/20 text-primary px-2 py-0.5 rounded-full border border-primary/20">Night Drive</span>
+<span class="text-[10px] uppercase tracking-wider font-bold bg-white/10 text-white/60 px-2 py-0.5 rounded-full">Retro</span>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="text-primary hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">favorite</span>
+</button>
+<button class="text-white/30 hover:text-white transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Song Item 2 -->
+<div class="group flex items-center gap-4 py-3 px-2 rounded-xl hover:bg-white/5 transition-colors">
+<div class="relative h-16 w-16 shrink-0 overflow-hidden rounded-lg shadow-md border border-white/5">
+<img alt="Album cover" class="h-full w-full object-cover" data-alt="Vibrant colorful paint splashing texture art" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBexOO-srPLq6oR7k7Cs_YoyDOdTx8QBJ5hRu6NlZNEYFFh5EsFbqICAKogNsvQOqSCojRs7GbfmGr3YJAHoKpiCe6WJYy7SUuku-e1HgLTGNLdOlsV8nvJZoMc1ZxFL0fuCotbIJuR3Ej9aHd8zJirsP0F6niXA0lUTPr5TnPw4K8Mi5pxBT_qkoQjCOQW7Qn279_P9y6cBYtBaIJQRWvVph_Q1sFK0b-AC9VoF56WBhztHaV-_he0ZUn2GsnSbBNZE1Dk7Uj_bswY"/>
+<div class="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-white text-2xl">play_circle</span>
+</div>
+</div>
+<div class="flex-1 min-w-0">
+<h3 class="font-bold text-base truncate">Levitating</h3>
+<p class="text-white/50 text-sm truncate">Dua Lipa</p>
+<div class="flex gap-1.5 mt-1.5">
+<span class="text-[10px] uppercase tracking-wider font-bold bg-primary/20 text-primary px-2 py-0.5 rounded-full border border-primary/20">Energetic</span>
+<span class="text-[10px] uppercase tracking-wider font-bold bg-white/10 text-white/60 px-2 py-0.5 rounded-full">Upbeat</span>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="text-primary hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">favorite</span>
+</button>
+<button class="text-white/30 hover:text-white transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Song Item 3 -->
+<div class="group flex items-center gap-4 py-3 px-2 rounded-xl hover:bg-white/5 transition-colors">
+<div class="relative h-16 w-16 shrink-0 overflow-hidden rounded-lg shadow-md border border-white/5">
+<img alt="Album cover" class="h-full w-full object-cover" data-alt="Minimalist sunset over dark mountain range" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPQWk5K9EEnNHkHqn-LsovKLPRf9k6jQz1AV466etGhe11lEKM_wUI_rgPC3UFGMk-xiQhWB3mZ3BfYnjoL3fFf2wHyEp-P7x55kP0yKSJcwXAahgdDqRFqIQfi3DguyYUDBozxU12HlLX8LkfvZRpgq8er-XlDgNXcnBQYm1rEfLZ7oey_ZgsDppVJfBcQB0DU33lFUV_UGFIdq6fgadARmLK1W9D7VWTuVHI-qtq2ZkT_6gdaZbs8t2vCTyLKbxxSl7UGMbLTej3"/>
+<div class="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-white text-2xl">play_circle</span>
+</div>
+</div>
+<div class="flex-1 min-w-0">
+<h3 class="font-bold text-base truncate">Coffee Shop Ambience</h3>
+<p class="text-white/50 text-sm truncate">Lofi Girl</p>
+<div class="flex gap-1.5 mt-1.5">
+<span class="text-[10px] uppercase tracking-wider font-bold bg-primary/20 text-primary px-2 py-0.5 rounded-full border border-primary/20">Chill</span>
+<span class="text-[10px] uppercase tracking-wider font-bold bg-white/10 text-white/60 px-2 py-0.5 rounded-full">Study</span>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="text-primary hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">favorite</span>
+</button>
+<button class="text-white/30 hover:text-white transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Song Item 4 -->
+<div class="group flex items-center gap-4 py-3 px-2 rounded-xl hover:bg-white/5 transition-colors">
+<div class="relative h-16 w-16 shrink-0 overflow-hidden rounded-lg shadow-md border border-white/5">
+<img alt="Album cover" class="h-full w-full object-cover" data-alt="Moody purple and blue smoke pattern" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcv7YYU64rW4dUHzq1tNFgoTF2FFhb-XfNum_vBIO_0nuojgxmL2PMO0TNUVJTfIg306s0IqPhysL5Q15gMJGGQQqg5c-49u7lF4ccQHYgg4AEFMvZKvPY2q6KhEgbLhMCtbSdyIbTVdjcx6llaq7zoAy6o3SKAeeNxeFO1taJHD9mds-9J2yKbhbmXkZgwsXEMPgR_DL6_OWYRZpiRGjvq63BNIEav-n5IF51lENn7MaT8PH0SY7G7wQbuEP5UqYfc3-koqAR_q2C"/>
+<div class="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-white text-2xl">play_circle</span>
+</div>
+</div>
+<div class="flex-1 min-w-0">
+<h3 class="font-bold text-base truncate">Midnight City</h3>
+<p class="text-white/50 text-sm truncate">M83</p>
+<div class="flex gap-1.5 mt-1.5">
+<span class="text-[10px] uppercase tracking-wider font-bold bg-primary/20 text-primary px-2 py-0.5 rounded-full border border-primary/20">Night Drive</span>
+<span class="text-[10px] uppercase tracking-wider font-bold bg-white/10 text-white/60 px-2 py-0.5 rounded-full">Electric</span>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="text-primary hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">favorite</span>
+</button>
+<button class="text-white/30 hover:text-white transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Song Item 5 -->
+<div class="group flex items-center gap-4 py-3 px-2 rounded-xl hover:bg-white/5 transition-colors">
+<div class="relative h-16 w-16 shrink-0 overflow-hidden rounded-lg shadow-md border border-white/5">
+<img alt="Album cover" class="h-full w-full object-cover" data-alt="Concert stage lights with lens flare" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAMkG5PuCupzkVrMVOPsIPmPpJAh9Kq1uFP76fUDDeKeVNcbUacUbOqP-Pqqd4o4Pdso52G9wkTeEhTmCOZPtbiNeIk0DZY0zMJrxl6eCcjvX7iyj3QzQFAq52yX15H9Q6GVq_mJWYGdZGumjNzsQFlVGguIzutzCq26EgHwR2v6GtKF6THcb2ApTBAzVqUxMXs_HwXReWCvoQDgNj-6LbWa2oTsuQ8ONhegeDH4VaqNtn3dOPU3NYlsRwJIs3my7z-fC7jZjsHIrp"/>
+<div class="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-white text-2xl">play_circle</span>
+</div>
+</div>
+<div class="flex-1 min-w-0">
+<h3 class="font-bold text-base truncate">As It Was</h3>
+<p class="text-white/50 text-sm truncate">Harry Styles</p>
+<div class="flex gap-1.5 mt-1.5">
+<span class="text-[10px] uppercase tracking-wider font-bold bg-primary/20 text-primary px-2 py-0.5 rounded-full border border-primary/20">Pop</span>
+<span class="text-[10px] uppercase tracking-wider font-bold bg-white/10 text-white/60 px-2 py-0.5 rounded-full">Chill</span>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="text-primary hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">favorite</span>
+</button>
+<button class="text-white/30 hover:text-white transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Placeholder for end of list -->
+<div class="py-12 flex flex-col items-center justify-center opacity-20">
+<span class="material-symbols-outlined text-4xl mb-2">library_music</span>
+<p class="text-sm">End of Favorites</p>
+</div>
+</main>
+<!-- Bottom Navigation Bar (iOS style) -->
+<nav class="fixed bottom-0 left-0 right-0 glass-header border-t border-white/5 px-6 pb-6 pt-3 z-50">
+<div class="flex items-center justify-between max-w-md mx-auto">
+<button class="flex flex-col items-center gap-1 text-white/40 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-2xl">home</span>
+<span class="text-[10px] font-medium">Home</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-white/40 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-2xl">mood</span>
+<span class="text-[10px] font-medium">Moods</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1">favorite</span>
+<span class="text-[10px] font-bold">Favorites</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-white/40 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-2xl">person</span>
+<span class="text-[10px] font-medium">Profile</span>
+</button>
+</div>
+</nav>
+<!-- Floating Mini Player (Simplified for aesthetics) -->
+<div class="fixed bottom-24 left-4 right-4 bg-white/10 backdrop-blur-md rounded-2xl p-3 border border-white/10 flex items-center gap-3 shadow-2xl animate-in fade-in slide-in-from-bottom-4 duration-300">
+<div class="h-10 w-10 rounded-lg overflow-hidden shrink-0">
+<img alt="Now Playing" class="h-full w-full object-cover" data-alt="Abstract neon digital wave album art" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnfMLDJpouEIwxUUl49xrKsQrdjTwNUumVAH53XKnjanPjFDcUpTdLBmr8EENBpYLDY6PKaosIATWw4VnOMFaDktDpb-Z2DS4dUUfqzZdORFkEbA4x_JNIC_Pv2c-ygUfIWT-q4gexSsY9CrjGogR-QIsPzO175W757hOyFrSFfGOh_x-3C2rqAbxRUl0ueJGIFk4-hr2qU7WqRFIDBnAR6c26YRw-H9aX9YuvVWp_JIwv8BcCYy1lWoD6fKLb_tS3bw0kSbiV4IBC"/>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-xs font-bold truncate">Blinding Lights</p>
+<p class="text-[10px] text-white/50 truncate">The Weeknd</p>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-white/80">skip_previous</button>
+<button class="material-symbols-outlined text-white text-3xl">pause_circle</button>
+<button class="material-symbols-outlined text-white/80">skip_next</button>
+</div>
+</div>
+</body></html>

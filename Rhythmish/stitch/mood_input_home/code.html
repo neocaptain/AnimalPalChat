@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mood Input Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7f0df2",
+                        "background-light": "#f7f5f8",
+                        "background-dark": "#191022",
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Spline Sans', sans-serif;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glow-effect {
+            box-shadow: 0 0 20px rgba(127, 13, 242, 0.2);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white min-h-screen flex justify-center">
+<!-- iOS Container Mockup -->
+<div class="relative flex h-full min-h-screen w-full max-w-[430px] flex-col bg-background-light dark:bg-background-dark overflow-x-hidden border-x border-gray-200 dark:border-gray-800">
+<!-- Top App Bar -->
+<div class="flex items-center bg-transparent p-6 pb-2 justify-between">
+<div class="flex items-center gap-3">
+<div class="size-10 shrink-0 overflow-hidden rounded-full ring-2 ring-primary/20">
+<div class="bg-center bg-no-repeat aspect-square bg-cover size-full" data-alt="User profile avatar smiling" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCWESaKvzsax4lR6LMEtfGLrMvvn4emU4UiTdZpL8i35H-_jP2NMAYc2h47XGtP1UVptdzkkuLoL8PWYwxJUmQO1JFAbIh2sOCg-V4OU7g48uhajEpe0FNIFNB1EOPBVkrw1L3fQLQfXwE-1fRyeR16vT1I09zVN6RgTBFYH0sQs1lossDS7G7NmOWnuIY_XVXTSOlYljjg6z77F0xBu-vlZeNVLUwljCI7obuhPB95zsvA9vqYGauA_aIIWpwJH_UhnoBPFAotiV62");'></div>
+</div>
+<div>
+<p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Welcome back</p>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-tight">Hi Alex 👋</h2>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="flex size-10 items-center justify-center rounded-full bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-white">
+<span class="material-symbols-outlined text-[24px]">notifications</span>
+</button>
+</div>
+</div>
+<!-- Hero Section -->
+<div class="px-6 pt-8 pb-4">
+<h1 class="text-slate-900 dark:text-white text-[32px] font-bold leading-[1.1] tracking-tight">
+                What's your <span class="text-primary">rhythm</span> today?
+            </h1>
+<p class="text-slate-500 dark:text-slate-400 mt-2 text-base">Tell me how you feel, and I'll find the perfect YouTube soundtrack.</p>
+</div>
+<!-- Main Input Section -->
+<div class="flex flex-col gap-6 px-6 py-4">
+<!-- Text Input Area -->
+<div class="flex flex-col gap-3">
+<div class="relative">
+<textarea class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-slate-900 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 min-h-40 placeholder:text-slate-400 dark:placeholder:text-white/30 p-5 text-base font-normal leading-relaxed shadow-sm transition-all" placeholder="I'm feeling a bit stressed but want something to help me focus..."></textarea>
+<div class="absolute bottom-4 right-4 text-primary opacity-50">
+<span class="material-symbols-outlined">auto_awesome</span>
+</div>
+</div>
+<button class="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-xl h-14 px-5 bg-primary text-white text-base font-bold leading-normal tracking-wide shadow-lg shadow-primary/25 hover:brightness-110 active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined mr-2">psychology</span>
+<span>Analyze Mood</span>
+</button>
+</div>
+<!-- Divider -->
+<div class="flex items-center gap-4 py-2">
+<div class="h-[1px] flex-1 bg-slate-200 dark:bg-white/10"></div>
+<span class="text-slate-400 dark:text-white/30 text-xs font-bold uppercase tracking-widest">OR</span>
+<div class="h-[1px] flex-1 bg-slate-200 dark:bg-white/10"></div>
+</div>
+<!-- Visual Input Card -->
+<button class="relative group overflow-hidden rounded-xl p-px transition-all hover:scale-[1.01] active:scale-[0.99]">
+<div class="absolute inset-0 bg-gradient-to-br from-primary to-[#b066ff]"></div>
+<div class="relative flex items-center gap-4 bg-white dark:bg-background-dark rounded-[calc(1rem-1px)] p-6 transition-colors group-hover:bg-transparent">
+<div class="flex size-14 shrink-0 items-center justify-center rounded-full bg-primary/10 dark:bg-primary/20 text-primary group-hover:bg-white/20 group-hover:text-white transition-all">
+<span class="material-symbols-outlined text-[32px]">add_a_photo</span>
+</div>
+<div class="text-left">
+<h3 class="text-slate-900 dark:text-white font-bold text-lg leading-tight group-hover:text-white transition-colors">Visual Analysis</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm mt-0.5 group-hover:text-white/80 transition-colors">Capture or upload a photo of your vibe</p>
+</div>
+<div class="ml-auto text-slate-300 dark:text-white/20 group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</div>
+</div>
+</button>
+<!-- Quick Mood Chips -->
+<div class="mt-2">
+<p class="text-slate-400 dark:text-white/40 text-xs font-bold uppercase tracking-widest mb-3 px-1">Quick Moods</p>
+<div class="flex flex-wrap gap-2">
+<button class="px-4 py-2 rounded-full border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 text-slate-600 dark:text-slate-300 text-sm font-medium hover:bg-primary/10 hover:border-primary/30 hover:text-primary transition-all">🔥 Energetic</button>
+<button class="px-4 py-2 rounded-full border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 text-slate-600 dark:text-slate-300 text-sm font-medium hover:bg-primary/10 hover:border-primary/30 hover:text-primary transition-all">🌊 Calm</button>
+<button class="px-4 py-2 rounded-full border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 text-slate-600 dark:text-slate-300 text-sm font-medium hover:bg-primary/10 hover:border-primary/30 hover:text-primary transition-all">🌙 Lofi</button>
+<button class="px-4 py-2 rounded-full border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 text-slate-600 dark:text-slate-300 text-sm font-medium hover:bg-primary/10 hover:border-primary/30 hover:text-primary transition-all">🎸 Grunge</button>
+</div>
+</div>
+</div>
+<!-- Subtle Background Glows -->
+<div class="fixed top-[-10%] right-[-20%] size-80 rounded-full bg-primary/10 blur-[100px] pointer-events-none"></div>
+<div class="fixed bottom-[-10%] left-[-20%] size-80 rounded-full bg-primary/10 blur-[100px] pointer-events-none"></div>
+<!-- Bottom Navigation Mockup -->
+<div class="mt-auto flex items-center justify-around border-t border-slate-100 dark:border-white/5 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md px-6 py-4 pb-8">
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined fill-[1]">home</span>
+<span class="text-[10px] font-bold">Home</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined">explore</span>
+<span class="text-[10px] font-medium">Discover</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined">history</span>
+<span class="text-[10px] font-medium">History</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-[10px] font-medium">Settings</span>
+</button>
+</div>
+</div>
+</body></html>

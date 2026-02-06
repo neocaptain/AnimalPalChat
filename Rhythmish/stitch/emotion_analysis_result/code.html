@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Emotion Analysis Result</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7f0df2",
+                        "background-light": "#f7f5f8",
+                        "background-dark": "#191022",
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Spline Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .mood-glow {
+            box-shadow: 0 0 60px 10px rgba(127, 13, 242, 0.15);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white transition-colors duration-300">
+<!-- Main Container -->
+<div class="relative flex min-h-screen w-full flex-col max-w-md mx-auto overflow-x-hidden border-x border-slate-200 dark:border-slate-800">
+<!-- TopAppBar -->
+<header class="flex items-center p-4 pb-2 justify-between sticky top-0 z-10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">
+<button class="flex size-10 items-center justify-center rounded-full hover:bg-slate-200 dark:hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-slate-900 dark:text-white">arrow_back_ios_new</span>
+</button>
+<h2 class="text-lg font-bold leading-tight tracking-tight flex-1 text-center pr-10">Analysis Result</h2>
+</header>
+<!-- Hero Section -->
+<main class="flex-1 overflow-y-auto px-6 pb-24">
+<!-- Abstract Art / Mood Visualizer -->
+<div class="flex w-full @container py-8">
+<div class="relative w-full aspect-square rounded-3xl overflow-hidden flex items-center justify-center group">
+<!-- Background Art -->
+<div class="absolute inset-0 bg-gradient-to-tr from-primary/40 to-indigo-500/30 opacity-60"></div>
+<div class="absolute inset-0 bg-center bg-no-repeat bg-cover scale-110 blur-sm opacity-40" data-alt="Abstract purple and blue fluid art gradients" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB-8lpC3rXcp8mE_7cp1X7ewEJkg_YUMJ3y2pHNxpl1k-2AnPh37GoZGJfoWTvtdlEUdYyzhEwJwY6Yc5wVclift3kOlgJ4ZNE6g4di53FR5-0b9YpIKGovnumsrK_1LmIpflXWW6kvzb0MSU9Emxdq_Bvi2Pi2ZO5qRx5AC3qfpU9dtGUfPp8kLmxXTIQzIwFhSWjb4cEKGw013yLlv1YUfUmxpjNS4EZo7HWSMmP3pQfPOF9wgK9-ERY7tDtX_Pnee8npnZL1q77_");'></div>
+<!-- Main Emoji / Centerpiece -->
+<div class="relative z-10 flex flex-col items-center">
+<div class="text-[120px] filter drop-shadow-2xl animate-pulse">🌅</div>
+<div class="mt-4 px-4 py-1 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-xs font-medium uppercase tracking-widest">
+                            Mood Profile
+                        </div>
+</div>
+<!-- Glow effect -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-primary rounded-full blur-[80px] opacity-30"></div>
+</div>
+</div>
+<!-- Mood Headline -->
+<div class="text-center space-y-2 mb-8">
+<h1 class="text-3xl font-bold leading-tight px-2">A bit nostalgic but hopeful</h1>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium px-4">
+                    Based on your recent listening patterns and input photo.
+                </p>
+</div>
+<!-- Emotion Breakdown -->
+<section class="space-y-6">
+<div class="flex items-center justify-between">
+<h3 class="text-lg font-bold tracking-tight">Emotion Breakdown</h3>
+<span class="text-primary text-xs font-bold px-2 py-1 bg-primary/10 rounded-lg">LIVE AI SCAN</span>
+</div>
+<div class="space-y-5 bg-white/50 dark:bg-white/5 p-5 rounded-2xl border border-slate-200 dark:border-white/10 backdrop-blur-sm">
+<!-- Joy -->
+<div class="space-y-2">
+<div class="flex justify-between items-center text-sm">
+<span class="font-semibold flex items-center gap-2">
+<span class="material-symbols-outlined text-yellow-400 text-lg">sentiment_very_satisfied</span>
+                                Joy
+                            </span>
+<span class="text-slate-500 dark:text-slate-400 font-bold">30%</span>
+</div>
+<div class="h-2.5 w-full bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 30%;"></div>
+</div>
+</div>
+<!-- Calm -->
+<div class="space-y-2">
+<div class="flex justify-between items-center text-sm">
+<span class="font-semibold flex items-center gap-2">
+<span class="material-symbols-outlined text-blue-400 text-lg">water_drop</span>
+                                Calm
+                            </span>
+<span class="text-slate-500 dark:text-slate-400 font-bold">70%</span>
+</div>
+<div class="h-2.5 w-full bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 70%;"></div>
+</div>
+</div>
+<!-- Nostalgia -->
+<div class="space-y-2">
+<div class="flex justify-between items-center text-sm">
+<span class="font-semibold flex items-center gap-2">
+<span class="material-symbols-outlined text-orange-400 text-lg">history</span>
+                                Nostalgia
+                            </span>
+<span class="text-slate-500 dark:text-slate-400 font-bold">45%</span>
+</div>
+<div class="h-2.5 w-full bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 45%;"></div>
+</div>
+</div>
+</div>
+<!-- Analysis Detail -->
+<div class="p-4 rounded-xl border border-dashed border-slate-300 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-900/50">
+<p class="text-sm leading-relaxed text-slate-600 dark:text-slate-400 italic">
+                        "Your image shows warm sunset hues which often trigger feelings of peaceful reflection and long-term memory recall."
+                    </p>
+</div>
+</section>
+</main>
+<!-- Sticky Bottom CTA -->
+<footer class="fixed bottom-0 left-0 right-0 max-w-md mx-auto p-6 bg-gradient-to-t from-background-light via-background-light dark:from-background-dark dark:via-background-dark to-transparent">
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-xl shadow-lg shadow-primary/25 flex items-center justify-center gap-2 transition-transform active:scale-[0.98]">
+<span>Show Recommendations</span>
+<span class="material-symbols-outlined">auto_awesome</span>
+</button>
+<!-- iOS Indicator Spacer -->
+<div class="h-4"></div>
+</footer>
+</div>
+</body></html>

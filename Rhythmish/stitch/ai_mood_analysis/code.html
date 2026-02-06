@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI Mood Analysis</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7f0df2",
+                        "background-light": "#f7f5f8",
+                        "background-dark": "#191022",
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glow-effect {
+            box-shadow: 0 0 40px 10px rgba(127, 13, 242, 0.3);
+        }
+        .bg-gradient-mood {
+            background: radial-gradient(circle at top right, #1a0533 0%, #191022 100%);
+        }
+        .orb-pulse {
+            background: radial-gradient(circle, rgba(127, 13, 242, 0.4) 0%, rgba(127, 13, 242, 0) 70%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-white transition-colors duration-300 overflow-hidden">
+<!-- Main iOS Shell -->
+<div class="relative flex h-screen w-full flex-col bg-background-light dark:bg-background-dark overflow-hidden">
+<!-- Top App Bar (iOS Style) -->
+<div class="flex items-center px-6 py-4 justify-between z-10">
+<button class="flex items-center justify-center size-10 rounded-full bg-white/10 backdrop-blur-md">
+<span class="material-symbols-outlined text-white text-2xl">arrow_back_ios_new</span>
+</button>
+<h2 class="text-white text-lg font-semibold leading-tight tracking-tight">AI Mood Analysis</h2>
+<div class="size-10"></div> <!-- Spacer for balance -->
+</div>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col items-center justify-center px-8 relative">
+<!-- Animated Background Glows -->
+<div class="absolute inset-0 z-0 overflow-hidden">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] orb-pulse opacity-60"></div>
+<div class="absolute -bottom-20 -left-20 w-80 h-80 bg-primary/10 rounded-full blur-[100px]"></div>
+<div class="absolute -top-20 -right-20 w-80 h-80 bg-blue-500/10 rounded-full blur-[100px]"></div>
+</div>
+<!-- Central Visual Element (Pulsating Brain/Waves) -->
+<div class="relative z-10 flex flex-col items-center">
+<div class="relative w-64 h-64 flex items-center justify-center">
+<!-- Outer Ring -->
+<div class="absolute inset-0 border-2 border-primary/20 rounded-full scale-110"></div>
+<!-- Middle Ring -->
+<div class="absolute inset-4 border border-primary/40 rounded-full animate-pulse"></div>
+<!-- Core Icon -->
+<div class="relative w-40 h-40 bg-primary/20 backdrop-blur-2xl rounded-full flex items-center justify-center border border-primary/30 glow-effect">
+<span class="material-symbols-outlined text-primary text-[80px] leading-none">psychology</span>
+</div>
+<!-- Floating Particles / Visual Data Points -->
+<div class="absolute top-0 right-0 p-2 bg-white/10 backdrop-blur-lg rounded-full border border-white/20">
+<span class="material-symbols-outlined text-primary text-sm">music_note</span>
+</div>
+<div class="absolute bottom-8 left-0 p-2 bg-white/10 backdrop-blur-lg rounded-full border border-white/20">
+<span class="material-symbols-outlined text-blue-400 text-sm">auto_awesome</span>
+</div>
+<div class="absolute top-12 left-4 p-2 bg-white/10 backdrop-blur-lg rounded-full border border-white/20">
+<span class="material-symbols-outlined text-purple-300 text-sm">photo_camera</span>
+</div>
+</div>
+<!-- Text Content -->
+<div class="mt-12 text-center space-y-4 max-w-xs">
+<h1 class="text-white text-3xl font-bold tracking-tight">Analyzing your emotions...</h1>
+<p class="text-white/60 text-lg font-medium leading-relaxed">Finding the perfect melody for you...</p>
+</div>
+</div>
+<!-- Progress Information Card -->
+<div class="mt-16 w-full max-w-sm z-10">
+<div class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-2xl">
+<div class="flex justify-between items-end mb-3">
+<div class="flex flex-col">
+<span class="text-white/50 text-xs uppercase tracking-widest font-bold">Current Step</span>
+<span class="text-white font-medium">Neural processing in progress</span>
+</div>
+<span class="text-primary font-bold text-lg">65%</span>
+</div>
+<!-- Progress Bar -->
+<div class="h-3 w-full bg-white/10 rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full transition-all duration-1000 w-[65%] shadow-[0_0_15px_rgba(127,13,242,0.6)]"></div>
+</div>
+<!-- Steps Timeline -->
+<div class="mt-6 flex justify-between px-2">
+<div class="flex flex-col items-center gap-1">
+<div class="size-2 rounded-full bg-primary"></div>
+<span class="text-[10px] text-white/40 font-bold uppercase">Input</span>
+</div>
+<div class="flex flex-col items-center gap-1">
+<div class="size-2 rounded-full bg-primary ring-4 ring-primary/20"></div>
+<span class="text-[10px] text-white/80 font-bold uppercase">Analysis</span>
+</div>
+<div class="flex flex-col items-center gap-1">
+<div class="size-2 rounded-full bg-white/20"></div>
+<span class="text-[10px] text-white/40 font-bold uppercase">Output</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer / Action Area -->
+<div class="p-8 z-10 flex flex-col items-center gap-4">
+<div class="flex items-center gap-3 py-3 px-6 rounded-full bg-white/5 border border-white/10 backdrop-blur-md">
+<span class="material-symbols-outlined text-primary text-xl">youtube_activity</span>
+<span class="text-white/80 text-sm font-medium">Scanning 1.2M+ Tracks...</span>
+</div>
+<button class="mt-4 text-white/40 hover:text-white transition-colors text-sm font-semibold uppercase tracking-widest">
+                Cancel Analysis
+            </button>
+</div>
+<!-- Background Image Decorative -->
+<div class="absolute inset-0 -z-10 opacity-30">
+<div class="w-full h-full bg-center bg-no-repeat bg-cover opacity-20" data-alt="Abstract fluid dark purple and blue gradient background" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDHVrUitqc9MH-e7A65RksOcRZ55IzqheM1lbu7PO9LCCdbv2g2kAIgZKlZ1wBJhXTH7ddCxscWfzL66_QZB6j7M6makogy-4DdC7Skk9ylDjuIGbxBcUyNNkA2rtzVKnOvm2KfAwKRlTxrbkzkGyQYdVMXFvrJ5XIHiIuMeK5cpZjCcfqYKmLpuPx-4SSuKwk3S0XaoDk7mUTj_kXmz8RWlW4DGuLy8dxDYx4msDnBbV-rXC3vvGv2W8OHCN5tFFZ837GfrK_tnhpH");'></div>
+</div>
+</div>
+</body></html>

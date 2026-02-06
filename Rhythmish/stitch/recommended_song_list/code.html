@@ -1,0 +1,237 @@
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Recommended Songs by Match Score</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7f0df2",
+                        "background-light": "#f7f5f8",
+                        "background-dark": "#191022",
+                    },
+                    fontFamily: {
+                        "display": ["Spline Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        body {
+            font-family: 'Spline Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .mood-gradient {
+            background: radial-gradient(circle at top right, rgba(127, 13, 242, 0.15), transparent),
+                        radial-gradient(circle at bottom left, rgba(127, 13, 242, 0.05), transparent);
+        }
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white min-h-screen">
+<div class="h-12 w-full"></div>
+<header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-4 py-3 flex items-center justify-between border-b border-slate-200/50 dark:border-white/5">
+<button class="w-10 h-10 flex items-center justify-start text-slate-700 dark:text-white">
+<span class="material-symbols-outlined text-[28px]">chevron_left</span>
+</button>
+<h1 class="text-lg font-semibold tracking-tight">Sounds for your Mood</h1>
+<button class="w-10 h-10 flex items-center justify-end text-slate-700 dark:text-white">
+<span class="material-symbols-outlined text-[24px]">tune</span>
+</button>
+</header>
+<main class="px-4 pb-32 mood-gradient">
+<div class="py-6 flex flex-col items-center">
+<div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 mb-3">
+<span class="size-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-xs font-bold uppercase tracking-widest text-primary">Analyzed Mood</span>
+</div>
+<h2 class="text-3xl font-bold text-center tracking-tight">Vibes: Energetic</h2>
+<p class="text-slate-500 dark:text-slate-400 text-sm mt-2 text-center max-w-[280px]">
+                5 tracks sorted by your mood match score.
+            </p>
+</div>
+<div class="space-y-4">
+<div class="group bg-white dark:bg-[#211b27] rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-white/5 transition-all">
+<div class="aspect-video w-full bg-slate-200 dark:bg-slate-800 relative overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDF8A74w0TSKKeeRFTcaAxBNO8FX8iKgnVucJ7b4k-f2KXLxfe9dwvqZG2T8NFIKbLseSkc_1XkMTh0zcBbdOpB_JgxyXTBgZP2_RPTm0jc4tv-YL8i_miN4IvLCFROhN_2ShlOILCUxkjCWqEvvPrtQFnImxlnSlJyAtrv5-jf0D17ndK_PRkrflQUSANCaIot4UBmnic1FW2nneDBdAUhJFHL9ur3NtXq2iw2uqYtqHK0KQgmzd2JZP8inAwP3AzHWigkWMbJhrLW');"></div>
+<div class="absolute inset-0 bg-black/20"></div>
+<button class="absolute top-3 left-3 size-9 bg-black/40 backdrop-blur-md rounded-full flex items-center justify-center text-white border border-white/10 active:scale-90 transition-transform z-10">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</button>
+<div class="absolute top-3 right-3 bg-primary text-white text-[11px] font-bold px-2.5 py-1 rounded-full shadow-lg flex items-center gap-1 backdrop-blur-md">
+<span class="material-symbols-outlined text-[14px] fill-1">bolt</span>
+<span>99% Match</span>
+</div>
+<div class="absolute bottom-3 right-3 bg-black/70 px-2 py-0.5 rounded text-[10px] font-bold text-white uppercase tracking-tighter">
+                        4:02
+                    </div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-3">
+<div class="space-y-1">
+<h3 class="text-lg font-bold leading-tight">Midnight City</h3>
+<div class="flex flex-wrap gap-1.5 mb-1">
+<span class="text-[10px] font-medium px-2 py-0.5 rounded-full bg-primary/10 text-primary border border-primary/10">#Energetic</span>
+<span class="text-[10px] font-medium px-2 py-0.5 rounded-full bg-slate-100 dark:bg-white/5 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-white/10">#Upbeat</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm">M83</p>
+</div>
+</div>
+<button class="w-full flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white font-semibold py-3 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-xl">play_circle</span>
+<span>Play on YouTube</span>
+</button>
+</div>
+</div>
+<div class="group bg-white dark:bg-[#211b27] rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-white/5 transition-all">
+<div class="aspect-video w-full bg-slate-200 dark:bg-slate-800 relative overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB9sp2U489AR4YoI6IlXFj0_hL4k7W2g0ek4Uyp0hxG2V0GcKU_hLs1zET-apPaKz1leOyWNgv7vFxjvNscM_M9978b-C1soxWVXpsR0eu-EjaRjtg685vF9FhvKWABDxrnHasOdmBksy4Ly7UHXcO8sfAufIbbJ8wvZSgFEvpDEunIOK2W1LdAlQ9-C_YUT_JDJvUz9z2W3y558Jqnop7-Gm19j_hYq0luO1lB9RAIrqL2b3GMYBwh4TZKyLk6f77tJtGPVt9Mybog');"></div>
+<div class="absolute inset-0 bg-black/20"></div>
+<button class="absolute top-3 left-3 size-9 bg-black/40 backdrop-blur-md rounded-full flex items-center justify-center text-white border border-white/10 active:scale-90 transition-transform z-10">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</button>
+<div class="absolute top-3 right-3 bg-primary text-white text-[11px] font-bold px-2.5 py-1 rounded-full shadow-lg flex items-center gap-1 backdrop-blur-md">
+<span class="material-symbols-outlined text-[14px] fill-1">bolt</span>
+<span>96% Match</span>
+</div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-3">
+<div class="space-y-1">
+<h3 class="text-lg font-bold leading-tight">Starboy</h3>
+<div class="flex flex-wrap gap-1.5 mb-1">
+<span class="text-[10px] font-medium px-2 py-0.5 rounded-full bg-primary/10 text-primary border border-primary/10">#Vibrant</span>
+<span class="text-[10px] font-medium px-2 py-0.5 rounded-full bg-slate-100 dark:bg-white/5 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-white/10">#NightVibe</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm">The Weeknd</p>
+</div>
+</div>
+<button class="w-full flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white font-semibold py-3 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-xl">play_circle</span>
+<span>Play on YouTube</span>
+</button>
+</div>
+</div>
+<div class="group bg-white dark:bg-[#211b27] rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-white/5 transition-all">
+<div class="aspect-video w-full bg-slate-200 dark:bg-slate-800 relative overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBwR4Nk2m93PiNeX5JaAetx5rnvm-MK1rdcGBmoicQKS2p9v2XSRnP80CwoDJ74O9viATqp1h8Yc73Ax3XwTW-J4Ab1c1Py_wFtKaJ5Ow3qq2AME0Q_qtGMTJ9ABk_pot0lWmOzf-HG1T1Rn11TE3BwO2H6J-aXfF4d87EWmh9bpkVrWM1rb4QUF9F_Dljf0tUeP1tPLCJea68xtXeYDLRpJ7luemBIakLA6WZHXQm1HPWN51skDnl9SWKHDsbzkVPl0HZeUCqOkw8Q');"></div>
+<div class="absolute inset-0 bg-black/20"></div>
+<button class="absolute top-3 left-3 size-9 bg-black/40 backdrop-blur-md rounded-full flex items-center justify-center text-white border border-white/10 active:scale-90 transition-transform z-10">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</button>
+<div class="absolute top-3 right-3 bg-primary/80 text-white text-[11px] font-bold px-2.5 py-1 rounded-full shadow-lg flex items-center gap-1 backdrop-blur-md">
+<span class="material-symbols-outlined text-[14px] fill-1">bolt</span>
+<span>92% Match</span>
+</div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-3">
+<div class="space-y-1">
+<h3 class="text-lg font-bold leading-tight">Blinding Lights</h3>
+<div class="flex flex-wrap gap-1.5 mb-1">
+<span class="text-[10px] font-medium px-2 py-0.5 rounded-full bg-primary/10 text-primary border border-primary/10">#Retro</span>
+<span class="text-[10px] font-medium px-2 py-0.5 rounded-full bg-slate-100 dark:bg-white/5 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-white/10">#Fast</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm">The Weeknd</p>
+</div>
+</div>
+<button class="w-full flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white font-semibold py-3 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-xl">play_circle</span>
+<span>Play on YouTube</span>
+</button>
+</div>
+</div>
+<div class="group bg-white dark:bg-[#211b27] rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-white/5 transition-all">
+<div class="aspect-video w-full bg-slate-200 dark:bg-slate-800 relative overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB2Bu4CYmTHkHFhttl1_8bV2hVSAyoXJmun204gTF7-BOlO-IH5zoMtHvmrOWNXnzXi8qm21eMKAAKS9VxVuMT5WG7Z-rI-LIpgRqqZ6abjzz_QA8uR3RITzd6IUSXY8-IkF8G353hEeQUnnQpWXzMifZaDON4slqaj_q4-z2q5tCUrq8PAmMBCCjFQcJY-IAbY4pUAkW8tdYfiOwXITECqknF10dSIbqQaN17NSwzP0dRRS1130vFPzVzhSR-8LfNM6Z7XcEtIpK83');"></div>
+<div class="absolute inset-0 bg-black/20"></div>
+<button class="absolute top-3 left-3 size-9 bg-black/40 backdrop-blur-md rounded-full flex items-center justify-center text-white border border-white/10 active:scale-90 transition-transform z-10">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</button>
+<div class="absolute top-3 right-3 bg-white/20 dark:bg-black/40 text-slate-900 dark:text-white text-[11px] font-bold px-2.5 py-1 rounded-full shadow-lg border border-white/20 flex items-center gap-1 backdrop-blur-md">
+<span class="material-symbols-outlined text-[14px]">bolt</span>
+<span>88% Match</span>
+</div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-3">
+<div class="space-y-1">
+<h3 class="text-lg font-bold leading-tight">Levitating</h3>
+<div class="flex flex-wrap gap-1.5 mb-1">
+<span class="text-[10px] font-medium px-2 py-0.5 rounded-full bg-primary/10 text-primary border border-primary/10">#Pop</span>
+<span class="text-[10px] font-medium px-2 py-0.5 rounded-full bg-slate-100 dark:bg-white/5 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-white/10">#Dance</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm">Dua Lipa</p>
+</div>
+</div>
+<button class="w-full flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white font-semibold py-3 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-xl">play_circle</span>
+<span>Play on YouTube</span>
+</button>
+</div>
+</div>
+<div class="group bg-white dark:bg-[#211b27] rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-white/5 transition-all">
+<div class="aspect-video w-full bg-slate-200 dark:bg-slate-800 relative overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBjWeX8YqXGOpq_5nxu66QZLCi0vh_7p6lq7g2LlZPkVRyN-AqANGoZOCeTMMiIsAWKAJjbz9TbqXNTXvhr0yNdq01QRePt_U2qvqVSm2UCue1WQI2M0unMUNbm5XnEPLLm2RyOIxPLiRoPf4_ifgx6rA58CAJ4RvQwOo1oVvLfi3RQMVLgewLPylDwE9iF-Nba7i3YvV4Hl56LZrqxTiWs3GOq5rkXZCLjJYNbBYsiwB45eMpb6H0rac3YWd7IpIWTJu-0uqr4dNq5');"></div>
+<div class="absolute inset-0 bg-black/20"></div>
+<button class="absolute top-3 left-3 size-9 bg-black/40 backdrop-blur-md rounded-full flex items-center justify-center text-white border border-white/10 active:scale-90 transition-transform z-10">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</button>
+<div class="absolute top-3 right-3 bg-white/20 dark:bg-black/40 text-slate-900 dark:text-white text-[11px] font-bold px-2.5 py-1 rounded-full shadow-lg border border-white/20 flex items-center gap-1 backdrop-blur-md">
+<span class="material-symbols-outlined text-[14px]">bolt</span>
+<span>84% Match</span>
+</div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-3">
+<div class="space-y-1">
+<h3 class="text-lg font-bold leading-tight">Shut Up and Dance</h3>
+<div class="flex flex-wrap gap-1.5 mb-1">
+<span class="text-[10px] font-medium px-2 py-0.5 rounded-full bg-primary/10 text-primary border border-primary/10">#Nostalgic</span>
+<span class="text-[10px] font-medium px-2 py-0.5 rounded-full bg-slate-100 dark:bg-white/5 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-white/10">#HighEnergy</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm">Walk The Moon</p>
+</div>
+</div>
+<button class="w-full flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white font-semibold py-3 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-xl">play_circle</span>
+<span>Play on YouTube</span>
+</button>
+</div>
+</div>
+</div>
+<div class="h-28"></div>
+</main>
+<div class="fixed bottom-6 left-0 right-0 px-6 z-50">
+<div class="max-w-md mx-auto flex gap-3">
+<button class="flex-1 bg-white/10 dark:bg-white/5 backdrop-blur-xl border border-white/20 dark:border-white/10 text-slate-900 dark:text-white font-semibold py-4 rounded-full shadow-2xl flex items-center justify-center gap-2 transition-transform active:scale-95">
+<span class="material-symbols-outlined">refresh</span>
+<span>Refine Mood</span>
+</button>
+<button class="size-14 bg-primary text-white rounded-full shadow-2xl flex items-center justify-center transition-transform active:scale-95">
+<span class="material-symbols-outlined">share</span>
+</button>
+</div>
+</div>
+<div class="fixed bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-background-light dark:from-background-dark to-transparent pointer-events-none"></div>
+
+</body></html>
