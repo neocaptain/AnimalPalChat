@@ -1,42 +1,42 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const API_KEY = import.meta.env.VITE_GEMINI_API_KEY || (typeof process !== 'undefined' ? process.env.GEMINI_API_KEY : '');
+const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
 
 if (!API_KEY) {
-    console.error("GEMINI_API_KEY is not defined in environment variables.");
+  console.error("GEMINI_API_KEY is not defined in environment variables.");
 }
 
 const genAI = new GoogleGenerativeAI(API_KEY);
 
 export interface Emotion {
-    label: string;
-    value: number;
-    color: string;
-    icon: string;
+  label: string;
+  value: number;
+  color: string;
+  icon: string;
 }
 
 export interface SongRecommendation {
-    id: string;
-    title: string;
-    artist: string;
-    matchScore: number;
-    tags: string[];
-    thumbnail: string;
-    duration: string;
-    searchQuery: string;
+  id: string;
+  title: string;
+  artist: string;
+  matchScore: number;
+  tags: string[];
+  thumbnail: string;
+  duration: string;
+  searchQuery: string;
 }
 
 export interface AnalysisResult {
-    headline: string;
-    emotions: Emotion[];
-    recommendations: SongRecommendation[];
-    summary: string;
+  headline: string;
+  emotions: Emotion[];
+  recommendations: SongRecommendation[];
+  summary: string;
 }
 
 export async function analyzeMood(userInput: string): Promise<AnalysisResult> {
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-    const prompt = `
+  const prompt = `
     Analyze the following user mood description and provide a structured JSON response for a music recommendation app called "Rhythmish".
     User Input: "${userInput}"
 
@@ -70,18 +70,18 @@ export async function analyzeMood(userInput: string): Promise<AnalysisResult> {
     Return ONLY the raw JSON string.
   `;
 
-    try {
-        const result = await model.generateContent(prompt);
-        const response = await result.response;
-        const text = response.text();
+  try {
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    const text = response.text();
 
-        // Extract JSON if it's wrapped in markdown
-        const jsonMatch = text.match(/\{[\s\S]*\}/);
-        if (!jsonMatch) throw new Error("Could not parse AI response as JSON");
+    // Extract JSON if it's wrapped in markdown
+    const jsonMatch = text.match(/\{[\s\S]*\}/);
+    if (!jsonMatch) throw new Error("Could not parse AI response as JSON");
 
-        return JSON.parse(jsonMatch[0]);
-    } catch (error) {
-        console.error("AI Analysis Error:", error);
-        throw error;
-    }
+    return JSON.parse(jsonMatch[0]);
+  } catch (error) {
+    console.error("AI Analysis Error:", error);
+    throw error;
+  }
 }
