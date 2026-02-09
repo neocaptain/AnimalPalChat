@@ -33,11 +33,11 @@ export interface AnalysisResult {
   summary: string;
 }
 
-export async function analyzeMood(userInput: string): Promise<AnalysisResult> {
+export async function analyzeMood(userInput: string, imageFile?: File): Promise<AnalysisResult> {
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
   const prompt = `
-    Analyze the following user mood description and provide a structured JSON response for a music recommendation app called "Rhythmish".
+    Analyze the following user mood description ${imageFile ? "and the provided image" : ""} and provide a structured JSON response for a music recommendation app called "Rhythmish".
     User Input: "${userInput}"
 
     The JSON must follow this exact structure:
@@ -71,7 +71,13 @@ export async function analyzeMood(userInput: string): Promise<AnalysisResult> {
   `;
 
   try {
-    const result = await model.generateContent(prompt);
+    let result;
+    if (imageFile) {
+      const imagePart = await fileToGenerativePart(imageFile);
+      result = await model.generateContent([prompt, imagePart]);
+    } else {
+      result = await model.generateContent(prompt);
+    }
     const response = await result.response;
     const text = response.text();
 
@@ -84,4 +90,20 @@ export async function analyzeMood(userInput: string): Promise<AnalysisResult> {
     console.error("AI Analysis Error:", error);
     throw error;
   }
+}
+
+async function fileToGenerativePart(file: File) {
+  return new Promise<{ inlineData: { data: string; mimeType: string } }>((resolve) => {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const base64String = (reader.result as string).split(',')[1];
+      resolve({
+        inlineData: {
+          data: base64String,
+          mimeType: file.type,
+        },
+      });
+    };
+    reader.readAsDataURL(file);
+  });
 }

@@ -1,12 +1,100 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import { auth, googleProvider } from '../services/firebase';
+import { signInWithPopup, signOut, onAuthStateChanged, type User } from 'firebase/auth';
 
 interface MoodInputHomeProps {
-    onAnalyze: (text: string) => void;
+    onAnalyze: (text: string, imageFile?: File) => void;
 }
 
 const MoodInputHome: React.FC<MoodInputHomeProps> = ({ onAnalyze }) => {
     const [text, setText] = useState('');
+    const [user, setUser] = useState<User | null>(null);
+    const [imageFile, setImageFile] = useState<File | null>(null);
+    const [imagePreview, setImagePreview] = useState<string | null>(null);
+    const [isListening, setIsListening] = useState(false);
+    const fileInputRef = useRef<HTMLInputElement>(null);
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+            setUser(currentUser);
+        });
+        return () => unsubscribe();
+    }, []);
+
+    const handleLogin = async () => {
+        try {
+            await signInWithPopup(auth, googleProvider);
+        } catch (error) {
+            console.error("Login failed:", error);
+        }
+    };
+
+    const handleLogout = async () => {
+        try {
+            await signOut(auth);
+        } catch (error) {
+            console.error("Logout failed:", error);
+        }
+    };
+
+    const handleVoiceInput = () => {
+        if (!('webkitSpeechRecognition' in window)) {
+            alert("Speech recognition not supported in this browser.");
+            return;
+        }
+
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const recognition = new (window as any).webkitSpeechRecognition();
+        recognition.lang = 'en-US';
+        recognition.interimResults = false;
+        recognition.maxAlternatives = 1;
+
+        setIsListening(true);
+
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        recognition.onresult = (event: any) => {
+            const transcript = event.results[0][0].transcript;
+            setText((prev) => prev + (prev ? ' ' : '') + transcript);
+            setIsListening(false);
+        };
+
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        recognition.onerror = (event: any) => {
+            console.error("Speech recognition error", event.error);
+            setIsListening(false);
+        };
+
+        recognition.onend = () => {
+            setIsListening(false);
+        };
+
+        recognition.start();
+    };
+
+
+    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (file) {
+            setImageFile(file);
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setImagePreview(reader.result as string);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
+    const triggerFileInput = () => {
+        fileInputRef.current?.click();
+    };
+
+    const removeImage = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        setImageFile(null);
+        setImagePreview(null);
+        if (fileInputRef.current) fileInputRef.current.value = '';
+    };
 
     const quickMoods = [
         { label: 'Energetic', icon: '🔥' },
@@ -21,17 +109,40 @@ const MoodInputHome: React.FC<MoodInputHomeProps> = ({ onAnalyze }) => {
             <div className="flex items-center p-6 pb-2 justify-between">
                 <div className="flex items-center gap-3">
                     <div className="size-10 shrink-0 overflow-hidden rounded-full ring-2 ring-primary/20">
-                        <div
-                            className="bg-center bg-no-repeat aspect-square bg-cover size-full"
-                            style={{ backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuCWESaKvzsax4lR6LMEtfGLrMvvn4emU4UiTdZpL8i35H-_jP2NMAYc2h47XGtP1UVptdzkkuLoL8PWYwxJUmQO1JFAbIh2sOCg-V4OU7g48uhajEpe0FNIFNB1EOPBVkrw1L3fQLQfXwE-1fRyeR16vT1I09zVN6RgTBFYH0sQs1lossDS7G7NmOWnuIY_XVXTSOlYljjg6z77F0xBu-vlZeNVLUwljCI7obuhPB95zsvA9vqYGauA_aIIWpwJH_UhnoBPFAotiV62")' }}
-                        />
+                        {user?.photoURL ? (
+                            <img src={user.photoURL} alt={user.displayName || "User"} className="aspect-square size-full object-cover" />
+                        ) : (
+                            <div className="bg-slate-200 dark:bg-slate-700 size-full flex items-center justify-center text-slate-500 dark:text-slate-300">
+                                <span className="material-symbols-outlined">person</span>
+                            </div>
+                        )}
                     </div>
                     <div>
-                        <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">Welcome back</p>
-                        <h2 className="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-tight">Hi Alex 👋</h2>
+                        <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">
+                            {user ? "Welcome back" : "Welcome"}
+                        </p>
+                        <h2 className="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-tight">
+                            {user ? `Hi ${user.displayName?.split(' ')[0]} 👋` : "Guest"}
+                        </h2>
                     </div>
                 </div>
                 <div className="flex items-center gap-2">
+                    {user ? (
+                        <button
+                            onClick={handleLogout}
+                            className="flex size-10 items-center justify-center rounded-full bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-white hover:bg-slate-200 dark:hover:bg-white/10 transition-colors"
+                            title="Logout"
+                        >
+                            <span className="material-symbols-outlined text-[20px]">logout</span>
+                        </button>
+                    ) : (
+                        <button
+                            onClick={handleLogin}
+                            className="flex px-3 py-1.5 items-center justify-center rounded-full bg-primary/10 text-primary text-sm font-bold hover:bg-primary/20 transition-colors"
+                        >
+                            Login
+                        </button>
+                    )}
                     <button className="flex size-10 items-center justify-center rounded-full bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-white">
                         <span className="material-symbols-outlined text-[24px]">notifications</span>
                     </button>
@@ -65,17 +176,26 @@ const MoodInputHome: React.FC<MoodInputHomeProps> = ({ onAnalyze }) => {
                         <textarea
                             value={text}
                             onChange={(e) => setText(e.target.value)}
-                            className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-slate-900 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 min-h-40 placeholder:text-slate-400 dark:placeholder:text-white/30 p-5 text-base font-normal leading-relaxed shadow-sm transition-all"
+                            className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-slate-900 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 min-h-40 placeholder:text-slate-400 dark:placeholder:text-white/30 p-5 text-base font-normal leading-relaxed shadow-sm transition-all pb-12"
                             placeholder="I'm feeling a bit stressed but want something to help me focus..."
                         />
-                        <div className="absolute bottom-4 right-4 text-primary opacity-50">
-                            <span className="material-symbols-outlined">auto_awesome</span>
+                        <div className="absolute bottom-3 right-3 flex items-center gap-2">
+                            <button
+                                onClick={handleVoiceInput}
+                                className={`flex items-center justify-center size-10 rounded-full transition-all ${isListening ? 'bg-red-500 text-white animate-pulse' : 'text-slate-400 hover:bg-slate-100 dark:hover:bg-white/10'}`}
+                                title="Voice Input"
+                            >
+                                <span className="material-symbols-outlined">{isListening ? 'mic' : 'mic_none'}</span>
+                            </button>
+                            <div className="text-primary opacity-50 p-2">
+                                <span className="material-symbols-outlined">auto_awesome</span>
+                            </div>
                         </div>
                     </div>
                     <button
-                        onClick={() => text && onAnalyze(text)}
+                        onClick={() => (text || imageFile) && onAnalyze(text, imageFile || undefined)}
                         className="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-xl h-14 px-5 bg-primary text-white text-base font-bold leading-normal tracking-wide shadow-lg shadow-primary/25 hover:brightness-110 active:scale-[0.98] transition-all disabled:opacity-50"
-                        disabled={!text}
+                        disabled={!text && !imageFile}
                     >
                         <span className="material-symbols-outlined mr-2">psychology</span>
                         <span>Analyze Mood</span>
@@ -90,19 +210,47 @@ const MoodInputHome: React.FC<MoodInputHomeProps> = ({ onAnalyze }) => {
                 </div>
 
                 {/* Visual Input Card */}
-                <button className="relative group overflow-hidden rounded-xl p-px transition-all hover:scale-[1.01] active:scale-[0.99] w-full">
+                <input
+                    type="file"
+                    ref={fileInputRef}
+                    className="hidden"
+                    accept="image/*"
+                    onChange={handleFileChange}
+                />
+                <button
+                    onClick={triggerFileInput}
+                    className="relative group overflow-hidden rounded-xl p-px transition-all hover:scale-[1.01] active:scale-[0.99] w-full"
+                >
                     <div className="absolute inset-0 bg-gradient-to-br from-primary to-[#b066ff]"></div>
-                    <div className="relative flex items-center gap-4 bg-white dark:bg-background-dark rounded-[calc(1rem-1px)] p-6 transition-colors group-hover:bg-transparent">
-                        <div className="flex size-14 shrink-0 items-center justify-center rounded-full bg-primary/10 dark:bg-primary/20 text-primary group-hover:bg-white/20 group-hover:text-white transition-all">
-                            <span className="material-symbols-outlined text-[32px]">add_a_photo</span>
-                        </div>
-                        <div className="text-left">
-                            <h3 className="text-slate-900 dark:text-white font-bold text-lg leading-tight group-hover:text-white transition-colors">Visual Analysis</h3>
-                            <p className="text-slate-500 dark:text-slate-400 text-sm mt-0.5 group-hover:text-white/80 transition-colors">Capture or upload a photo of your vibe</p>
-                        </div>
-                        <div className="ml-auto text-slate-300 dark:text-white/20 group-hover:text-white transition-colors">
-                            <span className="material-symbols-outlined">chevron_right</span>
-                        </div>
+                    <div className="relative flex items-center gap-4 bg-white dark:bg-background-dark rounded-[calc(1rem-1px)] p-6 transition-colors group-hover:bg-transparent min-h-[100px]">
+                        {imagePreview ? (
+                            <div className="relative w-full flex items-center gap-4">
+                                <img src={imagePreview} alt="Preview" className="size-16 rounded-lg object-cover border-2 border-white/20" />
+                                <div className="text-left flex-1 min-w-0">
+                                    <h3 className="text-slate-900 dark:text-white font-bold text-lg leading-tight truncate group-hover:text-white transition-colors">{imageFile?.name}</h3>
+                                    <p className="text-slate-500 dark:text-slate-400 text-sm mt-0.5 group-hover:text-white/80 transition-colors">Tap Analyze to verify vibe</p>
+                                </div>
+                                <div
+                                    onClick={removeImage}
+                                    className="p-2 rounded-full hover:bg-white/20 text-slate-400 group-hover:text-white transition-colors"
+                                >
+                                    <span className="material-symbols-outlined">close</span>
+                                </div>
+                            </div>
+                        ) : (
+                            <>
+                                <div className="flex size-14 shrink-0 items-center justify-center rounded-full bg-primary/10 dark:bg-primary/20 text-primary group-hover:bg-white/20 group-hover:text-white transition-all">
+                                    <span className="material-symbols-outlined text-[32px]">add_a_photo</span>
+                                </div>
+                                <div className="text-left">
+                                    <h3 className="text-slate-900 dark:text-white font-bold text-lg leading-tight group-hover:text-white transition-colors">Visual Analysis</h3>
+                                    <p className="text-slate-500 dark:text-slate-400 text-sm mt-0.5 group-hover:text-white/80 transition-colors">Capture or upload a photo of your vibe</p>
+                                </div>
+                                <div className="ml-auto text-slate-300 dark:text-white/20 group-hover:text-white transition-colors">
+                                    <span className="material-symbols-outlined">chevron_right</span>
+                                </div>
+                            </>
+                        )}
                     </div>
                 </button>
 

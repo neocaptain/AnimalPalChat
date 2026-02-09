@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "561637716883",
+    "project_id": "rhythmish-ed2a0",
+    "storage_bucket": "rhythmish-ed2a0.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:561637716883:android:e59ac88a5854cc99b56e66",
+        "android_client_info": {
+          "package_name": "com.neocaptain.rhythmish"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzQINxIW7EZNy-gpnWpNusjs27VgwxOPM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

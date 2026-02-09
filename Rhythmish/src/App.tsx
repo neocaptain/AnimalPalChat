@@ -14,13 +14,12 @@ const App: React.FC = () => {
   const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const handleAnalyze = async (text: string) => {
+  const handleAnalyze = async (text: string, imageFile?: File) => {
     setState('ANALYSIS');
     setError(null);
 
-
     try {
-      const result = await analyzeMood(text);
+      const result = await analyzeMood(text, imageFile);
       setAnalysisResult(result);
     } catch (err) {
       console.error(err);
