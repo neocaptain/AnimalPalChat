@@ -1,0 +1,628 @@
+﻿node.exe : 2026-02-06T01:56:57.298Z vite:config 
+config file loaded in 148.72ms
+위치 줄:1 문자:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Progr
+am Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (20 
+   26-02-06T01:5...ded in 148.72ms:String) [],  
+   RemoteException
+    + FullyQualifiedErrorId : NativeCommandErro 
+   r
+ 
+2026-02-06T01:56:57.304Z vite:env loading env fi
+les: [ '.env', '.env.local', '.env.production', 
+'.env.production.local' ]
+2026-02-06T01:56:57.306Z vite:env env files load
+ed in 3.42ms
+2026-02-06T01:56:57.321Z vite:env using resolved
+ env: {
+  GEMINI_API_KEY: 'AIzaSyB8rFQSiM-QSMoUnUG6-S9fc
+Hb-tmH8MTw',
+  ALLUSERSPROFILE: 'C:\\ProgramData',
+  ANTIGRAVITY_AGENT: '1',
+  ANTIGRAVITY_CLI_ALIAS: 'agy',
+  APPDATA: 'C:\\Users\\obzen NT-047\\AppData\\Ro
+aming',
+  BUNDLED_DEBUGPY_PATH: 'c:\\Users\\obzen NT-047
+\\.antigravity\\extensions\\ms-python.debugpy-20
+25.18.0-win32-x64\\bundled\\libs\\debugpy',
+  CHROME_CRASHPAD_PIPE_NAME: '\\\\.\\pipe\\crash
+pad_10036_IOVFULIQNBSQBBTM',
+  COLOR: '0',
+  COLORTERM: 'truecolor',
+  CommonProgramFiles: 'C:\\Program Files\\Common
+ Files',
+  'CommonProgramFiles(x86)': 'C:\\Program Files 
+(x86)\\Common Files',
+  CommonProgramW6432: 'C:\\Program Files\\Common
+ Files',
+  COMPUTERNAME: 'DESKTOP-F05TIEJ',
+  ComSpec: 'C:\\Windows\\system32\\cmd.exe',
+  DEBUG: 'vite:*',
+  DriverData: 'C:\\Windows\\System32\\Drivers\\D
+riverData',
+  EDITOR: 'C:\\Windows\\notepad.exe',
+  EFC_13868: '1',
+  GIT_ASKPASS: 'c:\\Users\\obzen NT-047\\AppData
+\\Local\\Programs\\Antigravity\\resources\\app\\
+extensions\\git\\dist\\askpass.sh',
+  GOPATH: 'C:\\Users\\obzen NT-047\\go',
+  HOME: 'C:\\Users\\obzen NT-047',
+  HOMEDRIVE: 'C:',
+  HOMEPATH: '\\Users\\obzen NT-047',
+  INIT_CWD: 'C:\\Users\\obzen NT-047\\Saved Game
+s\\?꾩쑀??\AI?먮룞?붿뿰援ы댋\\AnimalPalChat',
+  JAVA_HOME: 'C:\\openjdk-1.8.0.392',
+  LANG: 'en_US.UTF-8',
+  LOCALAPPDATA: 'C:\\Users\\obzen NT-047\\AppDat
+a\\Local',
+  LOGONSERVER: '\\\\DESKTOP-F05TIEJ',
+  NODE: 'C:\\Program Files\\nodejs\\node.exe',
+  NODE_ENV: 'production',
+  npm_command: 'exec',
+  npm_config_cache: 'C:\\Users\\obzen NT-047\\Ap
+pData\\Local\\npm-cache',
+  npm_config_globalconfig: 'C:\\Users\\obzen NT-
+047\\AppData\\Roaming\\npm\\etc\\npmrc',
+  npm_config_global_prefix: 'C:\\Users\\obzen NT
+-047\\AppData\\Roaming\\npm',
+  npm_config_init_module: 'C:\\Users\\obzen NT-0
+47\\.npm-init.js',
+  npm_config_local_prefix: 'C:\\Users\\obzen NT-
+047\\Saved Games\\?꾩쑀??\AI?먮룞?붿뿰援ы댋\\AnimalPalCh
+at',
+  npm_config_node_gyp: 'C:\\Program Files\\nodej
+s\\node_modules\\npm\\node_modules\\node-gyp\\bi
+n\\node-gyp.js',
+  npm_config_noproxy: '',
+  npm_config_npm_version: '11.6.2',
+  npm_config_prefix: 'C:\\Users\\obzen NT-047\\A
+ppData\\Roaming\\npm',
+  npm_config_userconfig: 'C:\\Users\\obzen NT-04
+7\\.npmrc',
+  npm_config_user_agent: 'npm/11.6.2 node/v24.13
+.0 win32 x64 workspaces/false',
+  npm_execpath: 'C:\\Program Files\\nodejs\\node
+_modules\\npm\\bin\\npm-cli.js',
+  npm_lifecycle_event: 'npx',
+  npm_lifecycle_script: 'vite',
+  npm_node_execpath: 'C:\\Program Files\\nodejs\
+\node.exe',
+  npm_package_json: 'C:\\Users\\obzen NT-047\\Sa
+ved Games\\?꾩쑀??\AI?먮룞?붿뿰援ы댋\\AnimalPalChat\\pac
+kage.json',
+  npm_package_name: 'animal-pal-chat',
+  npm_package_version: '0.0.0',
+  NUMBER_OF_PROCESSORS: '8',
+  OneDrive: 'C:\\Users\\obzen NT-047\\OneDrive',
+  OS: 'Windows_NT',
+  PAGER: 'cat',
+  Path: 'C:\\Users\\obzen NT-047\\Saved Games\\?
+꾩쑀??\AI?먮룞?붿뿰援ы댋\\AnimalPalChat\\node_modules\\.
+bin;C:\\Users\\obzen NT-047\\Saved Games\\?꾩쑀??\
+AI?먮룞?붿뿰援ы댋\\AnimalPalChat\\node_modules\\.bin;C
+:\\Users\\obzen NT-047\\Saved Games\\?꾩쑀??\AI?먮룞
+?붿뿰援ы댋\\node_modules\\.bin;C:\\Users\\obzen NT-0
+47\\Saved Games\\?꾩쑀??\node_modules\\.bin;C:\\Us
+ers\\obzen NT-047\\Saved Games\\node_modules\\.b
+in;C:\\Users\\obzen NT-047\\node_modules\\.bin;C
+:\\Users\\node_modules\\.bin;C:\\node_modules\\.
+bin;C:\\Program Files\\nodejs\\node_modules\\npm
+\\node_modules\\@npmcli\\run-script\\lib\\node-g
+yp-bin;C:\\Windows\\system32;C:\\Windows;C:\\Win
+dows\\System32\\Wbem;C:\\Windows\\System32\\Wind
+owsPowerShell\\v1.0\\;C:\\Windows\\System32\\Ope
+nSSH\\;C:\\Program Files\\Go\\bin;C:\\Program Fi
+les\\nodejs\\;C:\\Program Files\\Git\\cmd;C:\\Us
+ers\\obzen NT-047\\AppData\\Local\\Microsoft\\Wi
+ndowsApps;C:\\Users\\obzen NT-047\\AppData\\Loca
+l\\Programs\\Antigravity\\bin;C:\\Users\\obzen N
+T-047\\go\\bin;C:\\openjdk-1.8.0.392\\bin;C:\\Us
+ers\\obzen NT-047\\AppData\\Local\\Packages\\Pyt
+honSoftwareFoundation.Python.3.12_qbz5n2kfra8p0\
+\LocalCache\\local-packages\\Python312\\Scripts;
+C:\\Users\\obzen NT-047\\AppData\\Roaming\\npm;c
+:\\Users\\obzen NT-047\\.antigravity\\extensions
+\\ms-python.debugpy-2025.18.0-win32-x64\\bundled
+\\scripts\\noConfigScripts',
+  PATHEXT: '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.J
+SE;.WSF;.WSH;.MSC;.CPL',
+  PROCESSOR_ARCHITECTURE: 'AMD64',
+  PROCESSOR_IDENTIFIER: 'Intel64 Family 6 Model 
+142 Stepping 10, GenuineIntel',
+  PROCESSOR_LEVEL: '6',
+  PROCESSOR_REVISION: '8e0a',
+  ProgramData: 'C:\\ProgramData',
+  ProgramFiles: 'C:\\Program Files',
+  'ProgramFiles(x86)': 'C:\\Program Files (x86)'
+,
+  ProgramW6432: 'C:\\Program Files',
+  PROMPT: '$P$G',
+  PSModulePath: 'C:\\Users\\obzen NT-047\\Docume
+nts\\WindowsPowerShell\\Modules;C:\\Program File
+s\\WindowsPowerShell\\Modules;C:\\Windows\\syste
+m32\\WindowsPowerShell\\v1.0\\Modules',
+  PUBLIC: 'C:\\Users\\Public',
+  PYDEVD_DISABLE_FILE_VALIDATION: '1',
+  PYTHONSTARTUP: 'c:\\Users\\obzen NT-047\\AppDa
+ta\\Roaming\\Antigravity\\User\\workspaceStorage
+\\22542c1950877282a3ebe33b718183ff\\ms-python.py
+thon\\pythonrc.py',
+  PYTHON_BASIC_REPL: '1',
+  SESSIONNAME: 'Console',
+  SystemDrive: 'C:',
+  SystemRoot: 'C:\\Windows',
+  TEMP: 'C:\\Users\\OBZENN~1\\AppData\\Local\\Te
+mp',
+  TERM_PROGRAM: 'vscode',
+  TERM_PROGRAM_VERSION: '1.107.0',
+  TMP: 'C:\\Users\\OBZENN~1\\AppData\\Local\\Tem
+p',
+  USERDOMAIN: 'DESKTOP-F05TIEJ',
+  USERDOMAIN_ROAMINGPROFILE: 'DESKTOP-F05TIEJ',
+  USERNAME: 'obzen NT-047',
+  USERPROFILE: 'C:\\Users\\obzen NT-047',
+  VSCODE_DEBUGPY_ADAPTER_ENDPOINTS: 'c:\\Users\\
+obzen NT-047\\.antigravity\\extensions\\ms-pytho
+n.debugpy-2025.18.0-win32-x64\\.noConfigDebugAda
+pterEndpoints\\endpoint-3710055f2c259d31.txt',
+  VSCODE_GIT_ASKPASS_EXTRA_ARGS: '',
+  VSCODE_GIT_ASKPASS_MAIN: 'c:\\Users\\obzen NT-
+047\\AppData\\Local\\Programs\\Antigravity\\reso
+urces\\app\\extensions\\git\\dist\\askpass-main.
+js',
+  VSCODE_GIT_ASKPASS_NODE: 'C:\\Users\\obzen NT-
+047\\AppData\\Local\\Programs\\Antigravity\\Anti
+gravity.exe',
+  VSCODE_GIT_IPC_HANDLE: '\\\\.\\pipe\\vscode-gi
+t-5dad2ae531-sock',
+  VSCODE_INJECTION: '1',
+  VSCODE_JDWP_ADAPTER_ENDPOINTS: 'c:\\Users\\obz
+en NT-047\\.antigravity\\extensions\\vscjava.vsc
+ode-java-debug-0.58.5-universal\\.noConfigDebugA
+dapterEndpoints\\endpoint-3710055f2c259d31.txt',
+  VSCODE_PYTHON_AUTOACTIVATE_GUARD: '1',
+  windir: 'C:\\Windows',
+  ZES_ENABLE_SYSMAN: '1'
+}
+2026-02-06T01:56:57.330Z vite:env loading env fi
+les: [
+  'C:/Users/obzen NT-047/Saved Games/?꾩쑀??AI?먮룞?
+붿뿰援ы댋/AnimalPalChat/.env',
+  'C:/Users/obzen NT-047/Saved Games/?꾩쑀??AI?먮룞?
+붿뿰援ы댋/AnimalPalChat/.env.local',
+  'C:/Users/obzen NT-047/Saved Games/?꾩쑀??AI?먮룞?
+붿뿰援ы댋/AnimalPalChat/.env.production',
+  'C:/Users/obzen NT-047/Saved Games/?꾩쑀??AI?먮룞?
+붿뿰援ы댋/AnimalPalChat/.env.production.local'
+]
+2026-02-06T01:56:57.331Z vite:env env files load
+ed in 1.57ms
+2026-02-06T01:56:57.338Z vite:env using resolved
+ env: {}
+2026-02-06T01:56:57.437Z vite:config using resol
+ved config: {
+  server: {
+    port: 3000,
+    strictPort: false,
+    host: '0.0.0.0',
+    allowedHosts: [],
+    https: undefined,
+    open: false,
+    proxy: undefined,
+    cors: {
+      origin: /^https?:\/\/(?:(?:[^:]+\.)?localh
+ost|127\.0\.0\.1|\[::1\])(?::\d+)?$/
+    },
+    headers: {},
+    warmup: { clientFiles: [], ssrFiles: [] },
+    middlewareMode: false,
+    fs: {
+      strict: true,
+      deny: [ '.env', '.env.*', '*.{crt,pem}', '
+**/.git/**' ],
+      allow: [
+        'C:/Users/obzen NT-047/Saved Games/?꾩쑀??
+AI?먮룞?붿뿰援ы댋/AnimalPalChat'
+      ]
+    },
+    preTransformRequests: true,
+    perEnvironmentStartEndDuringDev: false,
+    sourcemapIgnoreList: [Function: isInNodeModu
+les$1]
+  },
+  plugins: [
+    'vite:build-metadata',
+    'vite:watch-package-data',
+    'alias',
+    'vite:react-babel',
+    'vite:react-refresh',
+    'vite:modulepreload-polyfill',
+    'vite:resolve',
+    'vite:html-inline-proxy',
+    'vite:css',
+    'vite:esbuild',
+    'vite:json',
+    'vite:wasm-helper',
+    'vite:worker',
+    'vite:asset',
+    'vite:react-virtual-preamble',
+    'vite:wasm-fallback',
+    'vite:define',
+    'vite:css-post',
+    'vite:build-html',
+    'vite:worker-import-meta-url',
+    'vite:asset-import-meta-url',
+    'vite:force-systemjs-wrap-complete',
+    'commonjs',
+    'vite:data-uri',
+    'vite:rollup-options-plugins',
+    'vite:dynamic-import-vars',
+    'vite:import-glob',
+    'vite:build-import-analysis',
+    'vite:esbuild-transpile',
+    'vite:terser',
+    'vite:manifest',
+    'vite:ssr-manifest',
+    'vite:reporter',
+    'vite:load-fallback'
+  ],
+  define: {
+    'process.env.API_KEY': '"AIzaSyB8rFQSiM-QSMo
+UnUG6-S9fcHb-tmH8MTw"',
+    'process.env.GEMINI_API_KEY': '"AIzaSyB8rFQS
+iM-QSMoUnUG6-S9fcHb-tmH8MTw"',
+    'import.meta.env.VITE_GEMINI_API_KEY': '"AIz
+aSyB8rFQSiM-QSMoUnUG6-S9fcHb-tmH8MTw"'
+  },
+  resolve: {
+    externalConditions: [ 'node' ],
+    extensions: [
+      '.mjs',  '.js',
+      '.mts',  '.ts',
+      '.jsx',  '.tsx',
+      '.json'
+    ],
+    dedupe: [],
+    noExternal: [],
+    external: [],
+    preserveSymlinks: false,
+    alias: [
+      {
+        find: '@',
+        replacement: 'C:\\Users\\obzen NT-047\\S
+aved Games\\?꾩쑀??\AI?먮룞?붿뿰援ы댋\\AnimalPalChat'
+      },
+      {
+        find: /^\/?@vite\/env/,
+        replacement: '/@fs/C:/Users/obzen NT-047
+/Saved Games/?꾩쑀??AI?먮룞?붿뿰援ы댋/AnimalPalChat/node
+_modules/vite/dist/client/env.mjs'
+      },
+      {
+        find: /^\/?@vite\/client/,
+        replacement: '/@fs/C:/Users/obzen NT-047
+/Saved Games/?꾩쑀??AI?먮룞?붿뿰援ы댋/AnimalPalChat/node
+_modules/vite/dist/client/client.mjs'
+      }
+    ],
+    mainFields: [ 'browser', 'module', 'jsnext:m
+ain', 'jsnext' ],
+    conditions: [ 'module', 'browser', 'developm
+ent|production' ],
+    builtins: []
+  },
+  build: {
+    target: [ 'es2020', 'edge88', 'firefox78', '
+chrome87', 'safari14' ],
+    polyfillModulePreload: true,
+    modulePreload: { polyfill: true },
+    outDir: 'dist',
+    assetsDir: 'assets',
+    assetsInlineLimit: 4096,
+    sourcemap: false,
+    terserOptions: {},
+    rollupOptions: { onwarn: [Function: onwarn] 
+},
+    commonjsOptions: { include: [ /node_modules/
+ ], extensions: [ '.js', '.cjs' ] },
+    dynamicImportVarsOptions: { warnOnError: tru
+e, exclude: [ /node_modules/ ] },
+    write: true,
+    emptyOutDir: null,
+    copyPublicDir: true,
+    manifest: false,
+    lib: false,
+    ssrManifest: false,
+    ssrEmitAssets: false,
+    reportCompressedSize: true,
+    chunkSizeWarningLimit: 500,
+    watch: null,
+    cssCodeSplit: true,
+    minify: 'esbuild',
+    ssr: false,
+    emitAssets: true,
+    createEnvironment: [Function: createEnvironm
+ent],
+    cssTarget: [ 'es2020', 'edge88', 'firefox78'
+, 'chrome87', 'safari14' ],
+    cssMinify: true
+  },
+  esbuild: { jsxDev: false, jsx: 'automatic', js
+xImportSource: undefined },
+  optimizeDeps: {
+    include: [
+      'react',
+      'react-dom',
+      'react/jsx-dev-runtime',
+      'react/jsx-runtime'
+    ],
+    exclude: [],
+    needsInterop: [],
+    extensions: [],
+    disabled: undefined,
+    holdUntilCrawlEnd: true,
+    force: false,
+    noDiscovery: false,
+    esbuildOptions: { preserveSymlinks: false, j
+sx: 'automatic' }
+  },
+  environments: {
+    client: {
+      define: {
+        'process.env.API_KEY': '"AIzaSyB8rFQSiM-
+QSMoUnUG6-S9fcHb-tmH8MTw"',
+        'process.env.GEMINI_API_KEY': '"AIzaSyB8
+rFQSiM-QSMoUnUG6-S9fcHb-tmH8MTw"',
+        'import.meta.env.VITE_GEMINI_API_KEY': '
+"AIzaSyB8rFQSiM-QSMoUnUG6-S9fcHb-tmH8MTw"'
+      },
+      resolve: {
+        externalConditions: [ 'node' ],
+        extensions: [
+          '.mjs',  '.js',
+[36mvite v6.4.1 [32mbuilding for production...[36m[39m
+          '.mts',  '.ts',
+          '.jsx',  '.tsx',
+          '.json'
+        ],
+        dedupe: [],
+        noExternal: [],
+        external: [],
+        preserveSymlinks: false,
+        alias: [
+          {
+            find: '@',
+            replacement: 'C:\\Users\\obzen NT-04
+7\\Saved Games\\?꾩쑀??\AI?먮룞?붿뿰援ы댋\\AnimalPalChat
+'
+          },
+          {
+            find: /^\/?@vite\/env/,
+            replacement: '/@fs/C:/Users/obzen NT
+-047/Saved Games/?꾩쑀??AI?먮룞?붿뿰援ы댋/AnimalPalChat/
+node_modules/vite/dist/client/env.mjs'
+          },
+          {
+            find: /^\/?@vite\/client/,
+            replacement: '/@fs/C:/Users/obzen NT
+-047/Saved Games/?꾩쑀??AI?먮룞?붿뿰援ы댋/AnimalPalChat/
+node_modules/vite/dist/client/client.mjs'
+          }
+        ],
+        mainFields: [ 'browser', 'module', 'jsne
+xt:main', 'jsnext' ],
+        conditions: [ 'module', 'browser', 'deve
+lopment|production' ],
+        builtins: []
+      },
+      keepProcessEnv: false,
+      consumer: 'client',
+      optimizeDeps: {
+        include: [
+          'react',
+          'react-dom',
+          'react/jsx-dev-runtime',
+          'react/jsx-runtime'
+        ],
+        exclude: [],
+        needsInterop: [],
+        extensions: [],
+        disabled: undefined,
+        holdUntilCrawlEnd: true,
+        force: false,
+        noDiscovery: false,
+        esbuildOptions: { preserveSymlinks: fals
+e, jsx: 'automatic' }
+      },
+      dev: {
+        warmup: [],
+        sourcemap: { js: true },
+        sourcemapIgnoreList: [Function: isInNode
+Modules$1],
+        preTransformRequests: true,
+        createEnvironment: [Function: defaultCre
+ateClientDevEnvironment],
+        recoverable: true,
+        moduleRunnerTransform: false
+      },
+      build: {
+        target: [ 'es2020', 'edge88', 'firefox78
+', 'chrome87', 'safari14' ],
+        polyfillModulePreload: true,
+        modulePreload: { polyfill: true },
+        outDir: 'dist',
+        assetsDir: 'assets',
+        assetsInlineLimit: 4096,
+        sourcemap: false,
+        terserOptions: {},
+        rollupOptions: { onwarn: [Function: onwa
+rn] },
+        commonjsOptions: { include: [ /node_modu
+les/ ], extensions: [ '.js', '.cjs' ] },
+        dynamicImportVarsOptions: { warnOnError:
+ true, exclude: [ /node_modules/ ] },
+        write: true,
+        emptyOutDir: null,
+        copyPublicDir: true,
+        manifest: false,
+        lib: false,
+        ssrManifest: false,
+        ssrEmitAssets: false,
+        reportCompressedSize: true,
+        chunkSizeWarningLimit: 500,
+        watch: null,
+        cssCodeSplit: true,
+        minify: 'esbuild',
+        ssr: false,
+        emitAssets: true,
+        createEnvironment: [Function: createEnvi
+ronment],
+        cssTarget: [ 'es2020', 'edge88', 'firefo
+x78', 'chrome87', 'safari14' ],
+        cssMinify: true
+      }
+    }
+  },
+  configFile: 'C:/Users/obzen NT-047/Saved Games
+/?꾩쑀??AI?먮룞?붿뿰援ы댋/AnimalPalChat/vite.config.ts',
+  configFileDependencies: [
+    'C:/Users/obzen NT-047/Saved Games/?꾩쑀??AI?먮
+룞?붿뿰援ы댋/AnimalPalChat/vite.config.ts'
+  ],
+  inlineConfig: {
+    root: undefined,
+    base: undefined,
+    mode: undefined,
+    configFile: undefined,
+    configLoader: undefined,
+    logLevel: undefined,
+    clearScreen: undefined,
+    build: {}
+  },
+  root: 'C:/Users/obzen NT-047/Saved Games/?꾩쑀??
+AI?먮룞?붿뿰援ы댋/AnimalPalChat',
+  base: '/',
+  decodedBase: '/',
+  rawBase: '/',
+  publicDir: 'C:/Users/obzen NT-047/Saved Games/
+?꾩쑀??AI?먮룞?붿뿰援ы댋/AnimalPalChat/public',
+  cacheDir: 'C:/Users/obzen NT-047/Saved Games/?
+꾩쑀??AI?먮룞?붿뿰援ы댋/AnimalPalChat/node_modules/.vite
+',
+  command: 'build',
+  mode: 'production',
+  isWorker: false,
+  mainConfig: null,
+  bundleChain: [],
+  isProduction: true,
+  css: {
+    transformer: 'postcss',
+    preprocessorMaxWorkers: 0,
+    devSourcemap: false
+  },
+  json: { namedExports: true, stringify: 'auto' 
+},
+  builder: undefined,
+  preview: {
+    port: 4173,
+    strictPort: false,
+    host: '0.0.0.0',
+    allowedHosts: [],
+    https: undefined,
+    open: false,
+    proxy: undefined,
+    cors: {
+      origin: /^https?:\/\/(?:(?:[^:]+\.)?localh
+ost|127\.0\.0\.1|\[::1\])(?::\d+)?$/
+    },
+    headers: {}
+  },
+  envDir: 'C:/Users/obzen NT-047/Saved Games/?꾩쑀
+??AI?먮룞?붿뿰援ы댋/AnimalPalChat',
+  env: { BASE_URL: '/', MODE: 'production', DEV:
+ false, PROD: true },
+  assetsInclude: [Function: assetsInclude],
+  logger: {
+    hasWarned: false,
+    info: [Function: info],
+    warn: [Function: warn],
+    warnOnce: [Function: warnOnce],
+    error: [Function: error],
+    clearScreen: [Function: clearScreen],
+    hasErrorLogged: [Function: hasErrorLogged]
+  },
+  packageCache: Map(1) {
+    'fnpd_C:/Users/obzen NT-047/Saved Games/?꾩쑀?
+?AI?먮룞?붿뿰援ы댋/AnimalPalChat' => {
+      dir: 'C:/Users/obzen NT-047/Saved Games/?꾩
+쑀??AI?먮룞?붿뿰援ы댋/AnimalPalChat',
+      data: {
+        name: 'animal-pal-chat',
+        private: true,
+        version: '0.0.0',
+        type: 'module',
+        scripts: { dev: 'vite', build: 'vite bui
+ld', preview: 'vite preview' },
+        dependencies: {
+          '@google/genai': '^1.39.0',
+          react: '^19.2.4',
+          'react-dom': '^19.2.4'
+        },
+        devDependencies: {
+          '@types/node': '^22.14.0',
+          '@vitejs/plugin-react': '^5.0.0',
+          typescript: '~5.8.2',
+          vite: '^6.2.0',
+          'vite-plugin-pwa': '^1.2.0'
+        }
+      },
+      hasSideEffects: [Function: hasSideEffects]
+,
+      setResolvedCache: [Function: setResolvedCa
+che],
+      getResolvedCache: [Function: getResolvedCa
+che]
+    },
+    set: [Function (anonymous)]
+  },
+  worker: { format: 'iife', plugins: '() => plug
+ins', rollupOptions: {} },
+  appType: 'spa',
+  experimental: { importGlobRestoreExtension: fa
+lse, hmrPartialAccept: false },
+  future: undefined,
+  ssr: {
+    target: 'node',
+    optimizeDeps: { esbuildOptions: { preserveSy
+mlinks: false } },
+    resolve: { conditions: undefined, externalCo
+nditions: undefined }
+  },
+  dev: {
+    warmup: [],
+    sourcemap: { js: true },
+    sourcemapIgnoreList: [Function: isInNodeModu
+les$1],
+    preTransformRequests: false,
+    createEnvironment: [Function: defaultCreateD
+evEnvironment],
+    recoverable: false,
+    moduleRunnerTransform: false
+  },
+  webSocketToken: 'OLItk7orWEL0',
+  getSortedPlugins: [Function: getSortedPlugins]
+,
+  getSortedPluginHooks: [Function: getSortedPlug
+inHooks],
+  createResolver: [Function: createResolver],
+  fsDenyGlob: [Function: arrayMatcher],
+  safeModulePaths: Set(0) {},
+  additionalAllowedHosts: [ '0.0.0.0', '0.0.0.0'
+ ],
+  Symbol(vite:resolved-config): true
+}
+transforming...
+[32m??[39m 38 modules transformed.

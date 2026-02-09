@@ -55,7 +55,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ messages, persona, onSendMessag
   return (
     <div className="flex flex-col flex-1 min-h-0 bg-transparent">
       {/* Messages Area */}
-      <div className="flex-1 overflow-y-auto p-4 md:p-6 space-y-6 no-scrollbar">
+      <div className="flex-1 overflow-y-auto p-3 md:p-6 space-y-4 md:space-y-6 no-scrollbar">
         {messages.map((msg) => (
           <div key={msg.id} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} animate-in fade-in slide-in-from-bottom-2 duration-300`}>
             <div className={`relative group max-w-[80%] md:max-w-[70%]`}>
@@ -99,7 +99,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ messages, persona, onSendMessag
       </div>
 
       {/* Glassmorphism Input Area */}
-      <div className="p-4 md:p-6 bg-white/40 backdrop-blur-md border-t border-white/20">
+      <div className="p-3 md:p-6 bg-white/40 backdrop-blur-md border-t border-white/20">
         <form onSubmit={handleSubmit} className="flex gap-3 items-center">
           <div className="relative flex-1 group">
             <input
